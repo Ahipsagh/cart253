@@ -192,8 +192,8 @@ void mousePressed()
 //- 7. Commit this change with a message explaining what you did.
 //- 8. Add a new conditional to the code that reacts to the user's input, e.g. you might want change the shape that is drawn based on where in the window the mouse is.
 //- 9. Put comments around the changes you have made to the code that say something like "CHANGED" followed by an explanation.
-// 10. Commit this change with a message explaining what you did.
-// 11. Don't forget to push your repository to github.com either at the end or throughout
-// 12. You're done!
-//
+//- 10. Commit this change with a message explaining what you did.
+//- 11. Don't forget to push your repository to github.com either at the end or throughout
+//- 12. You're done!
+//.
 //--END of instructions by Pippin Barr -------------------------------------------------------------------------------//
