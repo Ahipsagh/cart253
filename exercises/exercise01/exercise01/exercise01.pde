@@ -113,7 +113,6 @@ void playGame()
 //step 5. change to green
    changeFillColor = color(0, 255, 0);
    fill(changeFillColor);
-   println("check 1");
    check1=1; //s7 set check1 to 1
   }
   else 
@@ -128,9 +127,7 @@ void playGame()
   ellipse(circleX, circleY, circleSize, circleSize);
   circleX += circleVX;
   circleY += circleVY;
-  //println("check 2");
-  
-   check2=1; //s7 set check2 to 1
+  check2=1; //s7 set check2 to 1
   
 // Check :  when circle has reached either horizontal edge of the environment (SIZE) in order to prevent it  
 //          from going outside of the horizontal environment range and bounce it back
@@ -143,7 +140,6 @@ void playGame()
 
     changeFillColor = (int) color (random(0, 100),random(0,100),random(0,100));
     fill(changeFillColor);
-    println("check 3");
     check3=1; //s7 set check3 to 1
   }
 // Check :  when circle has reached either vertical edge of the environment (SIZE) in order to prevent it  
@@ -157,7 +153,6 @@ void playGame()
 //------------------------------------------------------------------------------------//
     changeFillColor = (int) color (random(100, 255),random(100,255),random(100,255));
     fill(changeFillColor);
-    println("check 4");
     check4=1; //s7 set check4 to 1
   }
   
