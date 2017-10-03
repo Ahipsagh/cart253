@@ -29,7 +29,7 @@ int paddleVX;
 int paddleSpeed = 10;
 int paddleWidth = 128;
 int paddleHeight = 16;
-color paddleColor = color(255);
+color paddleColor = color(255,255,255);
 //
 //------------------------------------------------------------------------------------//
 // Ball
@@ -40,7 +40,7 @@ int ballVX;
 int ballVY;
 int ballSpeed = 5;
 int ballSize = 16;
-color ballColor = color(255);
+color ballColor = color(255,255,255);
 //
 //------------------------------------------------------------------------------------//
 // Main program begins here
@@ -49,16 +49,23 @@ color ballColor = color(255);
 //           - single player against computer
 //
 void setup() {
+  println("setup");
   size(640, 480);
-  
+  float x = random(0,width);
+  float y = random(0,height);
+  fill(ballColor);
   setupPaddle();
   setupBall();
+//ah  drawStatic();
+
 }
 
 //------------------------------------------------------------------------------------//
 // setupPaddle
 //------------------------------------------------------------------------------------//
 void setupPaddle() {
+//ah  print("setupPaddle");
+//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   paddleX = width/2;
   paddleY = height - paddleHeight;
   paddleVX = 0;
@@ -68,6 +75,8 @@ void setupPaddle() {
 // setupBall 
 //------------------------------------------------------------------------------------//
 void setupBall() {
+//ah  print("setupBall");
+//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   ballX = width/2;
   ballY = height/2;
   ballVX = ballSpeed;
@@ -78,9 +87,11 @@ void setupBall() {
 // Draw 
 //------------------------------------------------------------------------------------//
 void draw() {
+//ah  print("draw");
+//ah  println("draw"+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   background(backgroundColor);
 
-  //ah drawStatic();
+//ah  drawStatic();
 
   updatePaddle();
   updateBall();
@@ -93,12 +104,15 @@ void draw() {
 // drawStatic
 //------------------------------------------------------------------------------------//
 void drawStatic() {
+//ah  print("drawStatic");
+//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   for (int i = 0; i < numStatic; i++) {
    float x = random(0,width);
    float y = random(0,height);
-   float staticSize = random(staticSizeMin,staticSizeMax);
-   fill(staticColor);
-   rect(x,y,staticSize,staticSize);
+//ah   float staticSize = random(staticSizeMin,staticSizeMax);
+//ah   fill(staticColor);
+   fill(ballColor);
+//ah   rect(x,y,staticSize,staticSize);
   }
 }
 
@@ -106,6 +120,8 @@ void drawStatic() {
 // updatePaddle 
 //------------------------------------------------------------------------------------//
 void updatePaddle() {
+//ah   print("updatePaddle");
+//ah   println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   paddleX += paddleVX;  
   paddleX = constrain(paddleX,0+paddleWidth/2,width-paddleWidth/2);
 }
@@ -114,11 +130,13 @@ void updatePaddle() {
 // updateBall
 //------------------------------------------------------------------------------------//
 void updateBall() {
+//ah  print("updateBall");
+//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   ballX += ballVX;
   ballY += ballVY;
   
   handleBallHitPaddle();
-  handleBallHitWall();
+  handleBallHitWall(); 
   handleBallOffBottom();
 }
 
@@ -126,6 +144,8 @@ void updateBall() {
 // drawPaddle
 //------------------------------------------------------------------------------------//
 void drawPaddle() {
+//ah  print("drawPaddle");
+//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   rectMode(CENTER);
   noStroke();
   fill(paddleColor);
@@ -136,6 +156,8 @@ void drawPaddle() {
 // drawBall
 //------------------------------------------------------------------------------------//
 void drawBall() {
+//ah  println("drawBall");
+//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   rectMode(CENTER);
   noStroke();
   fill(ballColor);
@@ -146,34 +168,69 @@ void drawBall() {
 // handleBallHitPaddle
 //------------------------------------------------------------------------------------//
 void handleBallHitPaddle() {
+
+ //ah println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   if (ballOverlapsPaddle()) {
+      println("handleBallHitPaddle");
+    stretchNSquashBall();
     ballY = paddleY - paddleHeight/2 - ballSize/2;
     ballVY = -ballVY;
   }
 }
 
-boolean ballOverlapsPaddle() {
-  if (ballX - ballSize/2 > paddleX - paddleWidth/2 && ballX + ballSize/2 < paddleX + paddleWidth/2) {
-    if (ballY > paddleY - paddleHeight/2) {
+boolean ballOverlapsPaddle() 
+{
+  if (ballX - ballSize/2 > paddleX - paddleWidth/2 && ballX + ballSize/2 < paddleX + paddleWidth/2) 
+  {
+    if (ballY > paddleY - paddleHeight/2) 
+      {
+      println("ballOverlapsPaddle=true reset ball size");      
       return true;
-    }
+      }
   }
-  return false;
+//ah    else
+      {
+      //ah println(" F A L S E ");
+      return false;
+      }
+}
+//
+//------------------------------------------------------------------------------------//
+// stretchNSquashBall
+//------------------------------------------------------------------------------------//
+void stretchNSquashBall()
+{
+println("stretch n squash ball");
+  ballX = width/2;
+  ballY = height/2;
+  ballVX = ballSpeed++;
+  ballVY = ballSpeed++;
+  println("ball speed -------------------------------" + ballSpeed );
 }
 
 //
 //------------------------------------------------------------------------------------//
 // handleBallOffBottom
 //------------------------------------------------------------------------------------//
-void handleBallOffBottom() {
-  if (ballOffBottom()) {
-    ballX = width/2;
-    ballY = height/2;
+void handleBallOffBottom() 
+{
+//ah  print("handleBallOffBottom");
+//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
+  if (ballOffBottom())                    //down and out via bottom
+  {
+//ah println("ball hits bottom");
+ 
+        ballX = width/2;
+        ballY = height/2;
+        ballSpeed=5;
+        println("ball speed " + ballSpeed ); 
+    }
   }
-}
 
-boolean ballOffBottom() {
-  return (ballY - ballSize/2 > height);
+boolean ballOffBottom() 
+{
+//ahprintln("ahbolean "+ ballX + " " + (ballY- ballSize/2) + " "+ ballSpeed + " "+ height + " "+ ballColor);  
+      return (ballY - ballSize/2 > height);
 }
 
 //
@@ -181,10 +238,14 @@ boolean ballOffBottom() {
 // handleBallHitWall
 //------------------------------------------------------------------------------------//
 void handleBallHitWall() {
-  if (ballX - ballSize/2 < 0) {
+//ah  print("handleBallHitWall");
+//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
+  if (ballX - ballSize/2 < 0) {                  //hit left wall
+//ah    println("left wall");
     ballX = 0 + ballSize/2;
     ballVX = -ballVX;
-  } else if (ballX + ballSize/2 > width) {
+  } else if (ballX + ballSize/2 > width) {       //hit right wall
+//ah    println("RIGHT                         wall");
     ballX = width - ballSize/2;
     ballVX = -ballVX;
   }
@@ -200,6 +261,8 @@ void handleBallHitWall() {
 // left or right keyboard arrow keyPressed
 //------------------------------------------------------------------------------------//
 void keyPressed() {
+ //ah print("keyPressed");
+ //ah println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   if (keyCode == LEFT) {
     paddleVX = -paddleSpeed;
   } else if (keyCode == RIGHT) {
@@ -212,6 +275,8 @@ void keyPressed() {
 // left or right keyboard arrow keyReleased
 //------------------------------------------------------------------------------------//
 void keyReleased() {
+//ah  print("keyReleased");
+//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   if (keyCode == LEFT && paddleVX < 0) {
     paddleVX = 0;
   } else if (keyCode == RIGHT && paddleVX > 0) {
