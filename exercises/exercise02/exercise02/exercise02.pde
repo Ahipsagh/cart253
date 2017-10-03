@@ -369,10 +369,10 @@ void keyReleased() {
 // 13. DONE
 // Don't forget to push your repository to github.com either at the end or throughout
 //
-// 14.
+// 14. DONE
 // You're done!
 //
-// 15.
+// 15. DONE
 // Challenge: Can you add a scoring system to the game? What should the player get points for? How do you track the points? How could you display the score? With text at the top? In a more creative way?
 //
 //--END of requirements by Pippin Barr -------------------------------------------------------------------------------//
