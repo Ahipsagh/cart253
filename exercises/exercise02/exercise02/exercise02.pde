@@ -172,7 +172,11 @@ void handleBallHitPaddle() {
  //ah println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   if (ballOverlapsPaddle()) {
       println("handleBallHitPaddle");
-    stretchNSquashBall();
+//
+//Step 5 Added function to increase ball speed when hit with paddle
+      increaseBallSpeed();
+//Step 5 ----------------------------------------------------------
+//
     ballY = paddleY - paddleHeight/2 - ballSize/2;
     ballVY = -ballVY;
   }
@@ -194,11 +198,11 @@ boolean ballOverlapsPaddle()
       return false;
       }
 }
-//
+//Step 5 Added function to increase ball speed when hit with paddle
 //------------------------------------------------------------------------------------//
-// stretchNSquashBall
+// increaseBallSpeed
 //------------------------------------------------------------------------------------//
-void stretchNSquashBall()
+void increaseBallSpeed()
 {
 println("stretch n squash ball");
   ballX = width/2;
@@ -222,7 +226,13 @@ void handleBallOffBottom()
  
         ballX = width/2;
         ballY = height/2;
+//
+//Step 5 reset ballSpeed to original speed when ball drops out of bottom
         ballSpeed=5;
+//Step 5 ----------------------------------------------------------
+//
+
+        
         println("ball speed " + ballSpeed ); 
     }
   }
@@ -302,13 +312,13 @@ void keyReleased() {
 // 3. DONE
 // Commit this change with a message like "Commented exercise code".
 //
-// 4.
+// 4. DONE
 // Change how the ball reacts to hitting the paddle (maybe it could go faster, maybe it could change colour, maybe it could become invisible, maybe it could go in a random direction, ...)
 //
-// 5.
+// 5. DONE
 // Add comments to your change and include a comment that says CHANGED so we can see where you've made changes
 //
-// 6.
+// 6. DONE
 // Commit this change with an explanation of how you changed the ball behaviour
 //
 // 7.
