@@ -173,9 +173,9 @@ void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) {
       println("handleBallHitPaddle");
 //
-//Step 5 Added function to increase ball speed when hit with paddle
+//CHANGED Step 5 Added function to increase ball speed when hit with paddle
       increaseBallSpeed();
-//Step 5 ----------------------------------------------------------
+//CHANGED Step 5 ----------------------------------------------------------
 //
     ballY = paddleY - paddleHeight/2 - ballSize/2;
     ballVY = -ballVY;
@@ -198,7 +198,7 @@ boolean ballOverlapsPaddle()
       return false;
       }
 }
-//Step 5 Added function to increase ball speed when hit with paddle
+//CHANGED Step 5 Added function to increase ball speed when hit with paddle
 //------------------------------------------------------------------------------------//
 // increaseBallSpeed
 //------------------------------------------------------------------------------------//
@@ -227,9 +227,9 @@ void handleBallOffBottom()
         ballX = width/2;
         ballY = height/2;
 //
-//Step 5 reset ballSpeed to original speed when ball drops out of bottom
+//CHANGED Step 5 reset ballSpeed to original speed when ball drops out of bottom
         ballSpeed=5;
-//Step 5 ----------------------------------------------------------
+//CHANGED Step 5 ----------------------------------------------------------
 //
 
         
