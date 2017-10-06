@@ -1,5 +1,13 @@
+//------------------------------------------------------------------------------------//
+// C L A S S   Bouncer
+//------------------------------------------------------------------------------------//
+//
+
 class Bouncer {
-  
+//------------------------------------------------------------------------------------//
+// D E C L A R E   V A R I A B L E S
+//------------------------------------------------------------------------------------//
+// 
  int x;
  int y;
  int vx;
@@ -8,7 +16,19 @@ class Bouncer {
  color fillColor;
  color defaultColor;
  color hoverColor;
- 
+//------------------------------------------------------------------------------------//
+// invoke bouncer with attributes :
+//
+// x    = tempX      = x coordinate - horizonal location on screen
+// y    = tempY      = y coordinate - vertical location on screen
+// vx   = tempVX     = vx coordinate - horizonal velocity
+// vy   = tempVY     = vy coordinate - vertical velocity
+// size = tempSize   = 
+// color= tempDefaultColor=
+// hoverColor= tempHoverColor=
+//------------------------------------------------------------------------------------//
+// 
+
  Bouncer(int tempX, int tempY, int tempVX, int tempVY, int tempSize, color tempDefaultColor, color tempHoverColor) {
    x = tempX;
    y = tempY;
@@ -19,6 +39,10 @@ class Bouncer {
    hoverColor = tempHoverColor;
    fillColor = defaultColor;
  }
+//------------------------------------------------------------------------------------//
+// M A I N 
+//------------------------------------------------------------------------------------//
+// 
  
  void update() {
    x += vx;
@@ -27,21 +51,30 @@ class Bouncer {
    handleBounce();
    handleMouse();
  }
- 
+ //------------------------------------------------------------------------------------//
+// handleBounce
+//------------------------------------------------------------------------------------//
+// 
+
  void handleBounce() {
-   if (x - size/2 < 0 || x + size/2 > width) {
+   if (x - size/2 < 0 || x + size/2 > width) {        // off the screen 
     vx = -vx; 
    }
    
-   if (y - size/2 < 0 || y + size/2 > height) {
+   if (y - size/2 < 0 || y + size/2 > height) {       // off the screen
      vy = -vy;
    }
    
-   x = constrain(x,size/2,width-size/2);
-   y = constrain(y,size/2,height-size/2);
+   x = constrain(x,size/2,width-size/2);              // keep on screen
+   y = constrain(y,size/2,height-size/2);             // keep on screen
  }
- 
+ //------------------------------------------------------------------------------------//
+// HandleMouse
+//------------------------------------------------------------------------------------//
+// 
+
  void handleMouse() {
+//ah   println("mouseX,mouseY,x,y " + mouseX + " " + mouseY + " " + x + " " + y);
    if (dist(mouseX,mouseY,x,y) < size/2) {
     fillColor = hoverColor; 
    }
@@ -49,7 +82,11 @@ class Bouncer {
      fillColor = defaultColor;
    }
  }
- 
+ //------------------------------------------------------------------------------------//
+// Draw
+//------------------------------------------------------------------------------------//
+// 
+
  void draw() {
    noStroke();
    fill(fillColor);
