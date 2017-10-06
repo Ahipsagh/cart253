@@ -19,6 +19,8 @@ int numStatic = 1000;
 int staticSizeMin = 1;
 int staticSizeMax = 3;
 color staticColor = color(200);
+int outTextSize=1;
+int hits=0;
 //
 //------------------------------------------------------------------------------------//
 // Paddle
@@ -29,7 +31,7 @@ int paddleVX;
 int paddleSpeed = 10;
 int paddleWidth = 128;
 int paddleHeight = 16;
-color paddleColor = color(255,255,255);
+color paddleColor = color(255, 255, 255);
 //
 //------------------------------------------------------------------------------------//
 // Ball
@@ -40,7 +42,7 @@ int ballVX;
 int ballVY;
 int ballSpeed = 5;
 int ballSize = 16;
-color ballColor = color(255,255,255);
+color ballColor = color(255, 255, 255);
 //
 //------------------------------------------------------------------------------------//
 // Main program begins here
@@ -49,23 +51,23 @@ color ballColor = color(255,255,255);
 //           - single player against computer
 //
 void setup() {
-  println("setup");
+
   size(640, 480);
-  float x = random(0,width);
-  float y = random(0,height);
+  float x = random(0, width);
+  float y = random(0, height);
   fill(ballColor);
   setupPaddle();
   setupBall();
-//ah  drawStatic();
+  //ah  drawStatic();
 
+  // Trigger text loading before game starts
+  textSize(outTextSize);
 }
 
 //------------------------------------------------------------------------------------//
 // setupPaddle
 //------------------------------------------------------------------------------------//
 void setupPaddle() {
-//ah  print("setupPaddle");
-//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   paddleX = width/2;
   paddleY = height - paddleHeight;
   paddleVX = 0;
@@ -75,8 +77,6 @@ void setupPaddle() {
 // setupBall 
 //------------------------------------------------------------------------------------//
 void setupBall() {
-//ah  print("setupBall");
-//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   ballX = width/2;
   ballY = height/2;
   ballVX = ballSpeed;
@@ -87,32 +87,30 @@ void setupBall() {
 // Draw 
 //------------------------------------------------------------------------------------//
 void draw() {
-//ah  print("draw");
-//ah  println("draw"+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   background(backgroundColor);
 
-//ah  drawStatic();
+  //ah  drawStatic();
 
   updatePaddle();
   updateBall();
 
   drawPaddle();
   drawBall();
+  
+  //CHANGED Step 7 add a new loop to congratulate player based on number of hits
+  showCongratulations();
+  //CHANGED Step 10 add a new loop to show number of hits
+  showHits();
 }
 
 //------------------------------------------------------------------------------------//
 // drawStatic
 //------------------------------------------------------------------------------------//
 void drawStatic() {
-//ah  print("drawStatic");
-//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   for (int i = 0; i < numStatic; i++) {
-   float x = random(0,width);
-   float y = random(0,height);
-//ah   float staticSize = random(staticSizeMin,staticSizeMax);
-//ah   fill(staticColor);
-   fill(ballColor);
-//ah   rect(x,y,staticSize,staticSize);
+    float x = random(0, width);
+    float y = random(0, height);
+    fill(ballColor);
   }
 }
 
@@ -120,21 +118,17 @@ void drawStatic() {
 // updatePaddle 
 //------------------------------------------------------------------------------------//
 void updatePaddle() {
-//ah   print("updatePaddle");
-//ah   println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   paddleX += paddleVX;  
-  paddleX = constrain(paddleX,0+paddleWidth/2,width-paddleWidth/2);
+  paddleX = constrain(paddleX, 0+paddleWidth/2, width-paddleWidth/2);
 }
 
 //------------------------------------------------------------------------------------//
 // updateBall
 //------------------------------------------------------------------------------------//
 void updateBall() {
-//ah  print("updateBall");
-//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   ballX += ballVX;
   ballY += ballVY;
-  
+
   handleBallHitPaddle();
   handleBallHitWall(); 
   handleBallOffBottom();
@@ -144,8 +138,6 @@ void updateBall() {
 // drawPaddle
 //------------------------------------------------------------------------------------//
 void drawPaddle() {
-//ah  print("drawPaddle");
-//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   rectMode(CENTER);
   noStroke();
   fill(paddleColor);
@@ -156,8 +148,6 @@ void drawPaddle() {
 // drawBall
 //------------------------------------------------------------------------------------//
 void drawBall() {
-//ah  println("drawBall");
-//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   rectMode(CENTER);
   noStroke();
   fill(ballColor);
@@ -168,15 +158,22 @@ void drawBall() {
 // handleBallHitPaddle
 //------------------------------------------------------------------------------------//
 void handleBallHitPaddle() {
-
- //ah println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   if (ballOverlapsPaddle()) {
+<<<<<<< HEAD
       println("handleBallHitPaddle");
 //
 //CHANGED Step 5 Added function to increase ball speed when hit with paddle
       increaseBallSpeed();
 //CHANGED Step 5 ----------------------------------------------------------
 //
+=======
+
+    //
+    //Step 5 Added function to increase ball speed when hit with paddle
+    increaseBallSpeed();
+    //Step 5 ----------------------------------------------------------
+    //
+>>>>>>> e1fc526f37c8e66bc87416805f037d9d84958813
     ballY = paddleY - paddleHeight/2 - ballSize/2;
     ballVY = -ballVY;
   }
@@ -187,16 +184,14 @@ boolean ballOverlapsPaddle()
   if (ballX - ballSize/2 > paddleX - paddleWidth/2 && ballX + ballSize/2 < paddleX + paddleWidth/2) 
   {
     if (ballY > paddleY - paddleHeight/2) 
-      {
-      println("ballOverlapsPaddle=true reset ball size");      
-      return true;
-      }
+    {
+     return true;
+    }
   }
-//ah    else
-      {
-      //ah println(" F A L S E ");
-      return false;
-      }
+
+  {
+   return false;
+  }
 }
 //CHANGED Step 5 Added function to increase ball speed when hit with paddle
 //------------------------------------------------------------------------------------//
@@ -204,26 +199,76 @@ boolean ballOverlapsPaddle()
 //------------------------------------------------------------------------------------//
 void increaseBallSpeed()
 {
-println("stretch n squash ball");
-  ballX = width/2;
-  ballY = height/2;
-  ballVX = ballSpeed++;
-  ballVY = ballSpeed++;
-  println("ball speed -------------------------------" + ballSpeed );
+  if (ballVX < 0) {
+    ballVX--;
+  } else if (ballVX >= 0) {
+    ballVX++;
+  }
+
+  if (ballVY < 0) {
+    ballVY--;
+  } else {
+    ballVY++;
+  }
 }
 
+
+void showCongratulations() {
+  if (abs(ballVX) >= 7 && abs(ballVX) < 8 )
+  { 
+    outTextSize=55;
+    textSize(outTextSize);
+    textAlign(CENTER);
+    text("Brilliant", 200, 200); // Text on screen Brilliant
+ //   fill(0, 0, 0);
+  } else if (abs(ballVX) >= 8 && abs(ballVX) <= 9 ) {
+     outTextSize=95;
+    textSize(outTextSize);
+    textAlign(CENTER);
+    text("Fantastico!", 300, 100); // Text on screen Fantastico !
+ //   fill(0, 0, 0);
+  } else if (abs(ballVX) > 9 && abs(ballVX) <= 17 ) {
+    outTextSize=120;
+    textSize(outTextSize);
+    textAlign(CENTER);
+    text("AWEsome", 300, 300); // Text on screen AWEsome
+ //   fill(0, 0, 0);
+  } else if (abs(ballVX) > 14) {
+    outTextSize=150;
+    textSize(outTextSize);
+    textAlign(CENTER);
+    text("Master", 300, 150); // Text on screen Master of the Universe
+    //    fill(0, 0, 0);
+    outTextSize=55;
+    textSize(outTextSize);
+    textAlign(CENTER);
+    text("of the Universe", 300, 350);
+ //   fill(0, 0, 0);
+  }
+     
+}
+//CHANGED Step
+//------------------------------------------------------------------------------------//
+// Show hits
+//------------------------------------------------------------------------------------//
 //
+void showHits() {
+    hits = abs(ballVX)-5;
+    outTextSize=45;
+    fill(255);
+    textSize(outTextSize);
+    textAlign(CENTER);
+    text("Hits " + hits , 200,400); // show Hits on screen
+}
 //------------------------------------------------------------------------------------//
 // handleBallOffBottom
 //------------------------------------------------------------------------------------//
 void handleBallOffBottom() 
 {
-//ah  print("handleBallOffBottom");
-//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   if (ballOffBottom())                    //down and out via bottom
   {
-//ah println("ball hits bottom");
  
+<<<<<<< HEAD
         ballX = width/2;
         ballY = height/2;
 //
@@ -235,12 +280,23 @@ void handleBallOffBottom()
         
         println("ball speed " + ballSpeed ); 
     }
+=======
+    ballX = width/2;
+    ballY = height/2;
+    //
+    //Step 5 reset ballSpeed to original speed when ball drops out of bottom
+    ballSpeed=5;
+    ballVX = ballSpeed;
+    ballVY = ballSpeed;
+    //Step 5 ----------------------------------------------------------
+    //
+>>>>>>> e1fc526f37c8e66bc87416805f037d9d84958813
   }
+}
 
 boolean ballOffBottom() 
 {
-//ahprintln("ahbolean "+ ballX + " " + (ballY- ballSize/2) + " "+ ballSpeed + " "+ height + " "+ ballColor);  
-      return (ballY - ballSize/2 > height);
+  return (ballY - ballSize/2 > height);
 }
 
 //
@@ -248,18 +304,16 @@ boolean ballOffBottom()
 // handleBallHitWall
 //------------------------------------------------------------------------------------//
 void handleBallHitWall() {
-//ah  print("handleBallHitWall");
-//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   if (ballX - ballSize/2 < 0) {                  //hit left wall
-//ah    println("left wall");
+    //ah    println("left wall");
     ballX = 0 + ballSize/2;
     ballVX = -ballVX;
   } else if (ballX + ballSize/2 > width) {       //hit right wall
-//ah    println("RIGHT                         wall");
+    //ah    println("RIGHT                         wall");
     ballX = width - ballSize/2;
     ballVX = -ballVX;
   }
-  
+
   if (ballY - ballSize/2 < 0) {
     ballY = 0 + ballSize/2;
     ballVY = -ballVY;
@@ -271,8 +325,6 @@ void handleBallHitWall() {
 // left or right keyboard arrow keyPressed
 //------------------------------------------------------------------------------------//
 void keyPressed() {
- //ah print("keyPressed");
- //ah println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   if (keyCode == LEFT) {
     paddleVX = -paddleSpeed;
   } else if (keyCode == RIGHT) {
@@ -285,8 +337,6 @@ void keyPressed() {
 // left or right keyboard arrow keyReleased
 //------------------------------------------------------------------------------------//
 void keyReleased() {
-//ah  print("keyReleased");
-//ah  println(" "+ ballX + " " + ballY + " "+ ballSpeed + " "+ ballSize + " "+ ballColor);
   if (keyCode == LEFT && paddleVX < 0) {
     paddleVX = 0;
   } else if (keyCode == RIGHT && paddleVX > 0) {
@@ -321,31 +371,31 @@ void keyReleased() {
 // 6. DONE
 // Commit this change with an explanation of how you changed the ball behaviour
 //
-// 7.
+// 7. DONE
 // Add a new loop anywhere in the code that changes how the game looks (maybe it draws multiple paddles up the screen based on the 'real' one, maybe it draws the paddle so it's made out of lots of little rectangles of different colours, maybe it draws multiple balls on the screen only one of which is the real one, ...)
 //
-// 8.
+// 8. DONE
 // Add comments to your change and include a comment that says CHANGED wherever you made your changes
 //
-// 9.
+// 9. DONE
 // Commit your change with an explanation of how you used the loop
 //
-// 10.
+// 10. DONE
 // Add a new function to the program that checks some new situation for the ball (like handleBallOffScreen() does for example) and reacts to it (maybe it checks which quadrant of the screen the ball is in and sets its colour based on that, maybe it sets the ball's velocity based on how many times it has hit the paddle [you would need a new variable to track the number of hits for this!], ...). Make sure you call the function from the the updateBall() function.
 //
-// 11.
+// 11. DONE
 // Add comments to your change and include a comment that says CHANGED wherever you made your changes
 //
-// 12.
+// 12. DONE
 // Commit your change with an explanation of the function you added
 //
-// 13.
+// 13. DONE
 // Don't forget to push your repository to github.com either at the end or throughout
 //
-// 14.
+// 14. DONE
 // You're done!
 //
-// 15.
+// 15. DONE
 // Challenge: Can you add a scoring system to the game? What should the player get points for? How do you track the points? How could you display the score? With text at the top? In a more creative way?
 //
 //--END of requirements by Pippin Barr -------------------------------------------------------------------------------//
