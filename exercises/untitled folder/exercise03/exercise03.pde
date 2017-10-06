@@ -43,11 +43,11 @@ void setup() {
   int tempVX    = 2;
   int tempVY    = 2;
   int tempSize  = 50;
-  color tempDefaultColor = color(150,0,0,50);
+  color tempDefaultColor = color(0,0,0,50);
   color tempHoverColor = color(255,0,0,50);
   
   bouncer = new Bouncer(tempX, tempY, tempVX, tempVY, tempSize, tempDefaultColor, tempHoverColor);
-  bouncer2 = new Bouncer(width/2, height/2, -2, 2, 50, color(0, 0, 150, 50), color(0, 0, 255, 50));
+  bouncer2 = new Bouncer(width/2, height/2, -2, 2, 50, color(0, 0, 150, 50), color(0, 255, 0, 50));
 }
 
 void draw() {

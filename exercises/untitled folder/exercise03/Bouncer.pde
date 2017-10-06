@@ -57,14 +57,30 @@ class Bouncer {
 // 
 
  void handleBounce() {
-   if (x - size/2 < 0 || x + size/2 > width) {        // off the screen 
+//ah   if (x - size/2 < 0 || x + size/2 > width) {        // off the screen 
+//ah    vx = -vx; 
+//ah   }
+   if (x - size/2 < 0)   {        // off LEFT of screen 
+ println("LEFT");
     vx = -vx; 
    }
-   
-   if (y - size/2 < 0 || y + size/2 > height) {       // off the screen
-     vy = -vy;
+  
+    if (x + size/2 > width)   {    // off RIGHT of screen 
+ println("RIGHT");
+    vx = -vx; 
    }
-   
+//ah   if (y - size/2 < 0 || y + size/2 > height) {       // off the screen
+//ah     vy = -vy;
+//ah   }
+   if (y - size/2 < 0) {           // off the TOP of screen
+ println("TOP");
+ vy = -vy;
+   }
+  
+    if (y + size/2 > height) {           // off the BOTTOM of screen
+ println("BOTTOM");
+ vy = -vy;
+   }
    x = constrain(x,size/2,width-size/2);              // keep on screen
    y = constrain(y,size/2,height-size/2);             // keep on screen
  }
