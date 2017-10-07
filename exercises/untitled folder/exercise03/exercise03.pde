@@ -42,7 +42,7 @@ void setup() {
   int tempY     = height/2;
   int tempVX    = 2;
   int tempVY    = 2;
-  int tempSize  = 50;
+  int tempSize  = 10;
   color tempDefaultColor = color(0,0,0,50);
   color tempHoverColor = color(255,0,0,50);
   
@@ -78,14 +78,14 @@ void draw() {
 // 3.DONE
 // Commit this change with a message like "Commented exercise code".
 //
-// 4.
+// 4.DONE
 // Change how the bouncer behaves when it hits a wall (maybe it could wrap around to the other side of the screen, maybe
 // it could teleport to a random location, maybe it could move away at a different angle, ...)
 //
-// 5.
+// 5.DONE
 // Add comments to your change and also include a comment that says CHANGED so we can see where you've made changes
 //
-// 6.
+// 6.DONE
 // Commit this change in GitHub Desktop with a commit summary explaining how you changed the ball behaviour
 //
 // 7.
