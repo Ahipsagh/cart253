@@ -36,18 +36,18 @@ void setup() {
   // hoverColor= tempHoverColor=
   //------------------------------------------------------------------------------------//  
   //
-  //ah  bouncer = new Bouncer(width/2,height/2,2,2,50,color(150,0,0,50),color(255,0,0,50));
-  //ah  bouncer2 = new Bouncer(width/2,height/2,-2,2,50,color(0,0,150,50),color(0,0,255,50));
-  int tempX     = width/2;
-  int tempY     = height/2;
-  int tempVX    = 2;
-  int tempVY    = 2;
-  int tempSize  = 10;
-  color tempDefaultColor = color(0,0,0,50);
-  color tempHoverColor = color(255,0,0,50);
-  
-  bouncer = new Bouncer(tempX, tempY, tempVX, tempVY, tempSize, tempDefaultColor, tempHoverColor);
-  bouncer2 = new Bouncer(width/2, height/2, -2, 2, 50, color(0, 0, 150, 50), color(0, 255, 0, 50));
+   bouncer = new Bouncer(width/2,height/2,2,2,50,color(150,0,0,50),color(255,0,0,50));
+   bouncer2 = new Bouncer(width/2,height/2,-2,2,50,color(0,0,150,50),color(0,0,255,50));
+  //ah int tempX     = width/2;
+  //ah int tempY     = height/2;
+  //ah  int tempVX    = 2;
+  //ah int tempVY    = 2;
+  //ah int tempSize  = 10;
+  //ah  color tempDefaultColor = color(0,0,0,50);
+  //ah  color tempHoverColor = color(255,0,0,50);
+  //ah test section
+  //ahbouncer = new Bouncer(tempX, tempY, tempVX, tempVY, tempSize, tempDefaultColor, tempHoverColor);
+  //ahbouncer2 = new Bouncer(width/2, height/2, -2, 2, 50, color(0, 0, 150, 50), color(0, 255, 0, 50));
 }
 
 void draw() {
@@ -61,15 +61,15 @@ void draw() {
 //------------------------------------------------------------------------------------//
 //--Exercise requirements by Pippin Barr -------------------------------------------------------------------------------//
 //
-// 0. DONE
+// 0.DONE
 // Take the exercise code below and put it into a new Processing sketch called exercise03 and place it in your exercises 
 // folder in your local repository. (Note that there are two files this time, so you'll need to add a tab called Bouncer 
 // and put the appropriate code in it too.)
 //
-// 1. DONE
+// 1.DONE
 // Commit this change with a message like "Started exercise 03"
 //
-// 2. DONE
+// 2.DONE
 // Go through the code and make sure you understand how it works (run it too of course!), then comment the code to prove
 // that you understand what is happening. Make sure you comment at the top of every file to explain what it does, at the
 // top of each function to explain what it does, and then above any lines that need explaining (explain if statements and
@@ -100,10 +100,10 @@ void draw() {
 // 9.DONE
 // Commit this change in GitHub Desktop with a commit summary explaining the new behaviour
 //
-// 10.
+// 10.DONE
 // Don't forget to push your repository to github.com either at the end or throughout
 //
-// 11.
+// 11.DONE
 // You're done!
 //
 // 12.
