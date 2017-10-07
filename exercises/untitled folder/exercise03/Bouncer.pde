@@ -15,7 +15,11 @@ class Bouncer {
   int size;
   color fillColor;
   color defaultColor;
+  color lastDefaultColor; //CHANGED s7,8,9 
   color hoverColor;
+  color changeFillColor;  //CHANGED s7,8,9 
+  boolean mouseReleased;  //CHANGED s7,8,9 
+  char changeColor;       //CHANGED s7,8,9 
   //------------------------------------------------------------------------------------//
   // invoke bouncer with attributes :
   //
@@ -36,6 +40,7 @@ class Bouncer {
     vy = tempVY;
     size = tempSize;
     defaultColor = tempDefaultColor;
+    lastDefaultColor = tempDefaultColor;
     hoverColor = tempHoverColor;
     fillColor = defaultColor;
   }
@@ -50,13 +55,16 @@ class Bouncer {
 
     handleBounce();
     handleMouse();
+
+    //ah    if (mousePressed); //CHANGED change colour on mouseClicked  
+    //ah    changeColor();
   }
   //------------------------------------------------------------------------------------//
   // handleBounce
   // routine when the bounce collides with edge of environment.
   //
   //CHANGED
-  //Steps 4, 5, ^
+  // Steps 4, 5, 6
   // Split out the if statement to control when the bounce hits right/left/top/botom edges
   // Each time the bounce hits one of the edges it will re-emerge on a random location
   // on that edge.
@@ -64,44 +72,27 @@ class Bouncer {
   // 
 
   void handleBounce() {
-    //ah   if (x - size/2 < 0 || x + size/2 > width) {        // off the screen 
-    //ah    vx = -vx; 
-    //ah   }
     if (x - size/2 < 0) {        // off LEFT of screen 
       //ah   random(width)
-      println("before------LEFT w= " + width + "h= " + height + "x= " + x + "y= " + y);
       float randomY = random(0, height);
       y= int(randomY);
-      println("LEFT w= " + width + "h= " + height + "x= " + x + "y= " + y);
       vx = -vx;
     }
 
     if (x + size/2 > width) {    // off RIGHT of screen 
-      //ah println("RIGHT");
-      println("before---------------RIGHT w= " + width + "h= " + height + "x= " + x + "y= " + y);
       float randomY = random(0, height);
       y= int(randomY);
-      println("---------*****Right w= " + width + "h= " + height + "x= " + x + "y= " + y);
       vx = -vx;
     }
-    //ah   if (y - size/2 < 0 || y + size/2 > height) {       // off the screen
-    //ah     vy = -vy;
-    //ah   }
     if (y - size/2 < 0) {           // off the TOP of screen
-      println("TOP");
-      println("before-----TOP w= " + width + "h= " + height + "x= " + x + "y= " + y);
       float randomX = random(0, width);
       x= int(randomX);
-      println("*****TOP w= " + width + "h= " + height + "x= " + x + "y= " + y);
       vy = -vy;
     }
 
     if (y + size/2 > height) {           // off the BOTTOM of screen
-      println("BOTTOM");
-      println("before--Bottom w= " + width + "h= " + height + "x= " + x + "y= " + y);
       float randomX = random(0, width);
       x= int(randomX);
-      println("*****bottom w= " + width + "h= " + height + "x= " + x + "y= " + y);
       vy = -vy;
     }
     x = constrain(x, size/2, width-size/2);              // keep on screen
@@ -109,23 +100,74 @@ class Bouncer {
   }
   //------------------------------------------------------------------------------------//
   // HandleMouse
+  // when your mouse hovers over the ball the defaultColor changes to the hoverColor
   //------------------------------------------------------------------------------------//
   // 
 
-  void handleMouse() {
-    //ah   println("mouseX,mouseY,x,y " + mouseX + " " + mouseY + " " + x + " " + y);
-    if (dist(mouseX, mouseY, x, y) < size/2) {
+  void handleMouse() 
+  {
+    if (mousePressed) 
+      changeColor='Y';
+    {
+      mouseClicked();
+      if (mousePressed)
+        defaultColor = lastDefaultColor;
+      else 
+      if (mouseReleased)
+      {  
+        lastDefaultColor = defaultColor;
+        defaultColor = changeFillColor;
+      } else
+      if (! mousePressed)
+        changeColor='N';
+    }
+    if (dist(mouseX, mouseY, x, y) < size/2)
+    {
       fillColor = hoverColor;
-    } else {
+    } else 
+    {
+      lastDefaultColor = defaultColor;
       fillColor = defaultColor;
     }
   }
   //------------------------------------------------------------------------------------//
+  // mouseClicked
+  // 
+  //CHANGED
+  // Steps 7, 8, 9
+  // Change to random color on mouseClick
+  // Created variables to check when the mouseClick completed and to hold lastDefaultColor
+  //------------------------------------------------------------------------------------//
+  // 
+  void mouseClicked() 
+  {  
+    if (changeColor == 'Y') {
+      changeFillColor = color ((int) random(0, 100), (int) random(0, 100), (int) random(0, 100));
+      defaultColor = changeFillColor;
+    }
+  }
+  //
+  //------------------------------------------------------------------------------------//
   // Draw
   //------------------------------------------------------------------------------------//
   // 
+  //------------------------------------------------------------------------------------//
+  // mouseReleased
+  // 
+  //CHANGED
+  // Steps 7, 8, 9
+  // Created 2 control variables to determine that the random color should change only when the 
+  // mouseClicked (pressed and released) has completed.
+  //------------------------------------------------------------------------------------//
+  // 
+  void mouseReleased() 
+  {
+    boolean mouseReleased=true;
+    changeColor='Y';
+  }
 
-  void draw() {
+  void draw()
+  {
     noStroke();
     fill(fillColor);
     ellipse(x, y, size, size);

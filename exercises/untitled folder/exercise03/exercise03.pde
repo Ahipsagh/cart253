@@ -88,16 +88,16 @@ void draw() {
 // 6.DONE
 // Commit this change in GitHub Desktop with a commit summary explaining how you changed the ball behaviour
 //
-// 7.
+// 7.DONE
 // Add a new method to the Bouncer class that checks if the mouse is clicked in it and then changes it somehow (maybe it
 // could move faster or slower when clicked, maybe it could teleport somewhere else, maybe it could change size). Add any
 // properties needed to make your new behaviour work. Make sure you add a mouseClicked() function to the main program and
 //call the Bouncer's new method from there.
 //
-// 8.
+// 8.DONE
 // Add comments to explain your changes and include a comment that says CHANGED wherever you made your changes
 //
-// 9.
+// 9.DONE
 // Commit this change in GitHub Desktop with a commit summary explaining the new behaviour
 //
 // 10.
