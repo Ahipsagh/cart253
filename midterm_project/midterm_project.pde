@@ -1,6 +1,18 @@
+//------------------------------------------------------------------------------------//
+// CART253
+// Midterm Project: Pong
+// Professor      : Pippin Barr
+// Student        : Ariana Hipsagh
+// Student Number : 22689812
+// Repository     : https://github.com/ahipsagh/cart253
+// email          : ani.ariane.hipsagh@gmail.com
+//
+//
+//------------------------------------------------------------------------------------//
 // Pong
 //
-// A simple version of Pong using object-oriented programming.
+//
+//A simple version of Pong using object-oriented programming.
 // Allows to people to bounce a ball back and forth between
 // two paddles that they control.
 //
@@ -8,7 +20,12 @@
 // No score display. (Yet!)
 // Pretty ugly. (Now!)
 // Only two paddles. (So far!)
-
+// Declare variables
+//------------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------------//
+// Environment
+//------------------------------------------------------------------------------------//
+//
 // Global variables for the paddles and the ball
 Paddle leftPaddle;
 Paddle rightPaddle;
@@ -20,8 +37,9 @@ int PADDLE_INSET = 8;
 // The background colour during play (black)
 color backgroundColor = color(0);
 
-
+//------------------------------------------------------------------------------------//
 // setup()
+//------------------------------------------------------------------------------------//
 //
 // Sets the size and creates the paddles and ball
 
@@ -40,8 +58,9 @@ void setup() {
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
 }
-
+//------------------------------------------------------------------------------------//
 // draw()
+//------------------------------------------------------------------------------------//
 //
 // Handles all the magic of making the paddles and ball move, checking
 // if the ball has hit a paddle, and displaying everything.
@@ -70,8 +89,9 @@ void draw() {
   rightPaddle.display();
   ball.display();
 }
-
+//------------------------------------------------------------------------------------//
 // keyPressed()
+//------------------------------------------------------------------------------------//
 //
 // The paddles need to know if they should move based on a keypress
 // so when the keypress is detected in the main program we need to
@@ -82,8 +102,9 @@ void keyPressed() {
   leftPaddle.keyPressed();
   rightPaddle.keyPressed();
 }
-
+//------------------------------------------------------------------------------------//
 // keyReleased()
+//------------------------------------------------------------------------------------//
 //
 // As for keyPressed, except for released!
 
@@ -92,3 +113,34 @@ void keyReleased() {
   leftPaddle.keyReleased();
   rightPaddle.keyReleased();
 }
+/*
+//------------------------------------------------------------------------------------//
+
+Focus
+
+The focus for this project is on understanding and modifying pre-existing object-oriented
+code in a creative and interesting way.
+
+Brief
+
+You have five tasks to complete the project, each one involves editing and changing the
+existing code.
+
+1.
+Track and display the score
+2.
+Detect when the game is over and show who won
+3.
+Change the way the game looks
+4.
+Change the way the player controls the game
+5.
+Change the way the ball moves
+
+After completing these tasks you should end up with a version of Pong significantly 
+different to the original, with a new appearance, control scheme, movement style, and 
+score and result display. Don't forget to be creative! (e.g. Displaying the score with
+text at the top of the screen is not so creative...)
+// Requirements as per Pippin Barr----------------------------------------------------//
+
+*/
