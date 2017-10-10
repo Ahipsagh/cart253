@@ -80,7 +80,8 @@ void draw() {
 
   // Check if the ball has gone off the screen
   if (ball.isOffScreen()) {
-    // If it has, reset the ball
+    println("ball is off screen");
+      // If it has, reset the ball
     ball.reset();
   }
 
