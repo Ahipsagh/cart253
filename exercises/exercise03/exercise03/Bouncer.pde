@@ -66,7 +66,7 @@ class Bouncer {
   //CHANGED
   // Steps 4, 5, 6
   // Split out the if statement to control when the bounce hits right/left/top/botom edges
-  // Each time the bounce hits one of the edges it will re-emerge on a random location
+  // Each time the bounce hits one of the edges it will re-emerge at a random location
   // on that edge.
   //------------------------------------------------------------------------------------//
   // 
@@ -119,7 +119,6 @@ class Bouncer {
       else 
       if (! mousePressed)
       {
-          
         changeColor='N';
       }
     }
@@ -153,21 +152,6 @@ class Bouncer {
   // Draw
   //------------------------------------------------------------------------------------//
   // 
-  //------------------------------------------------------------------------------------//
-  // mouseReleased
-  // 
-  //CHANGED
-  // Steps 7, 8, 9
-  // Created 2 control variables to determine that the random color should change only when the 
-  // mouseClicked (pressed and released) has completed.
-  //------------------------------------------------------------------------------------//
-  // 
-  void mouseReleased() 
-  {
-    boolean mouseReleased=true;
-    changeColor='Y';
-  }
-
   void draw()
   {
     noStroke();
