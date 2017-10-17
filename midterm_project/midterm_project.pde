@@ -30,9 +30,10 @@
 Paddle leftPaddle;
 Paddle rightPaddle;
 Ball ball;
-Score enme_Score;
-Score player_Score;
-GameOver gameOver;
+Score enme_Score;   // Enemy Score 
+Score player_Score; // Player Score
+GameOver gameOver;  // Show GAME OVER screen
+
 
 
 
@@ -41,14 +42,18 @@ int PADDLE_INSET = 8;
 int enmeScore = 0;
 int playerScore = 0;
 int gameOverScore=0;
+int left = 150;
+int right = 450;
+
+boolean gameIsOver=false;   // control when game is over
+boolean winner=false;       // winner is detected by color
 
 // The background colour during play (black)
 color backgroundColor = color(0);
 color ENME_COLOR = color(255,0,0);
 color PLAYER_COLOR = color(0,0,255);
 
-int left = 100;
-int right = 400;
+
 
 //------------------------------------------------------------------------------------//
 // setup()
@@ -72,8 +77,8 @@ void setup() {
   ball = new Ball(width/2, height/2);
   
   // Create enme and player Score
-  enme_Score = new Score(enmeScore, ENME_COLOR, left);
-  player_Score = new Score(playerScore, PLAYER_COLOR, right);
+  enme_Score = new Score(enmeScore, ENME_COLOR, left, winner);
+  player_Score = new Score(playerScore, PLAYER_COLOR, right, winner);
   gameOver = new GameOver(gameOverScore);
 }
 //------------------------------------------------------------------------------------//
@@ -86,7 +91,8 @@ void setup() {
 void draw() {
   // Fill the background each frame so we have animation
   background(backgroundColor);
-
+  if (!gameIsOver)
+  {
   // Update the paddles and ball by calling their update methods
   leftPaddle.update();
   rightPaddle.update();
@@ -104,16 +110,26 @@ void draw() {
       // If it has, reset the ball
     ball.reset();
   }
-
+  }
   // Display the paddles, score  and the ball
-  
+  if (!gameIsOver)
+  {
   leftPaddle.display();
   enme_Score.display();
   rightPaddle.display();
   player_Score.display();
-  if (gameOverScore > 10)
-  gameOver.display();
   ball.display();
+  }
+  if (gameIsOver == true)
+  { 
+//    println("before it all ends");
+    enme_Score.display();
+     
+    player_Score.display();
+ 
+  //      println("enemy wins" + enmeScore + " " + playerScore);
+    gameOver.display();
+  }
   
   
     
@@ -157,7 +173,7 @@ existing code.
 
 1. DONE
 Track and display the score
-2.
+2. DONE
 Detect when the game is over and show who won
 3.
 Change the way the game looks

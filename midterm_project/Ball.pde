@@ -104,11 +104,23 @@ class Ball {
     {
       offScreen=1;
       player_Score.update();
+  //    println("player wins" + enmeScore + " " + playerScore);
+      if (playerScore == 10) 
+     {
+        gameIsOver = true;
+        winner = true;
+    }
 
       println("-------Player Scores here----------Left off screen" + playerScore + " " + offScreen );
     } else if (x - SIZE/2 > width) {
       offScreen=2;
       enme_Score.update();
+      println("enemy *****" + enmeScore + " " + enme_Score);
+      if (enmeScore == 10) 
+      {
+        gameIsOver = true;
+        winner = true;
+      }
       println("right off screen" + enmeScore + " " + playerScore);
     }
   }

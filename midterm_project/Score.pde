@@ -13,6 +13,7 @@ class Score {
   int score;
   int leftRight;
   color scoreColor;
+  boolean winner;
   
 
  
@@ -24,10 +25,11 @@ class Score {
 //
 // Gets the score and displays it on the screen
 
-  Score(int _score, color _scoreColor, int _leftRight) {
+  Score(int _score, color _scoreColor, int _leftRight, boolean _winner) {
     score = _score;
     scoreColor=_scoreColor;
     leftRight = _leftRight;
+    winner=_winner;
    }
 
 
@@ -41,8 +43,11 @@ class Score {
   void update() {
     // Update scores
    score++;
-   if (score > 10) {
-    gameOver.display();
+   if (score == 10) {
+     gameIsOver=true;
+     winner=true;
+     gameOver.display();
+    
    }
   }
 //------------------------------------------------------------------------------------//
@@ -56,8 +61,10 @@ void display() {
     fill(scoreColor);
     textSize(45);
     //textAlign( 150, leftRight);
-    text("Hits " + score , leftRight, 100); // show Hits on screen
-    println(abs(score) + " " + leftRight + " " + scoreColor);
+    text(score , leftRight, 100); // show Hits on screen
+    println(abs(score) + " " + leftRight + " " + winner);
+    if (winner) 
+    text("Wins", leftRight, 150);
 }
   
 
