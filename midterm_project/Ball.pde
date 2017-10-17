@@ -28,6 +28,9 @@ class Ball {
   // Scoring
   int playerScore=0;
   int enmeScore=0;
+  
+  // Image
+  PImage img;
 
 
   /////////////// Constructor ///////////////
@@ -166,7 +169,10 @@ class Ball {
     fill(ballColor);
     rectMode(CENTER);
 
-    // Draw the ball
-    rect(x, y, SIZE, SIZE);
+//    // Draw the ball
+//    rect(x, y, SIZE, SIZE);
+// Load a image on the screen
+image(img,x,y);
+
   }
 }

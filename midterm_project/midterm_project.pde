@@ -53,7 +53,8 @@ color backgroundColor = color(0);
 color ENME_COLOR = color(255,0,0);
 color PLAYER_COLOR = color(0,0,255);
 
-
+ // Image
+  PImage img;
 
 //------------------------------------------------------------------------------------//
 // setup()
@@ -75,6 +76,9 @@ void setup() {
 
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
+   // Image
+   size(50,50);
+  img = loadImage("fish.gif");
   
   // Create enme and player Score
   enme_Score = new Score(enmeScore, ENME_COLOR, left, winner);
@@ -175,7 +179,7 @@ existing code.
 Track and display the score
 2. DONE
 Detect when the game is over and show who won
-3.
+3. 
 Change the way the game looks
 4.
 Change the way the player controls the game
