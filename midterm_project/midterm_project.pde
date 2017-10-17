@@ -30,12 +30,25 @@
 Paddle leftPaddle;
 Paddle rightPaddle;
 Ball ball;
+Score enme_Score;
+Score player_Score;
+GameOver gameOver;
+
+
 
 // The distance from the edge of the window a paddle should be
 int PADDLE_INSET = 8;
+int enmeScore = 0;
+int playerScore = 0;
+int gameOverScore=0;
 
 // The background colour during play (black)
 color backgroundColor = color(0);
+color ENME_COLOR = color(255,0,0);
+color PLAYER_COLOR = color(0,0,255);
+
+int left = 100;
+int right = 400;
 
 //------------------------------------------------------------------------------------//
 // setup()
@@ -52,11 +65,16 @@ void setup() {
   // Also pass through the two keys used to control 'up' and 'down' respectively
   // NOTE: On a mac you can run into trouble if you use keys that create that popup of
   // different accented characters in text editors (so avoid those if you're changing this)
-  leftPaddle = new Paddle(PADDLE_INSET, height/2, '1', 'q');
-  rightPaddle = new Paddle(width - PADDLE_INSET, height/2, '0', 'p');
+  leftPaddle = new Paddle(PADDLE_INSET, height/2, '1', 'q', ENME_COLOR);
+  rightPaddle = new Paddle(width - PADDLE_INSET, height/2, '0', 'p',PLAYER_COLOR);
 
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
+  
+  // Create enme and player Score
+  enme_Score = new Score(enmeScore, ENME_COLOR, left);
+  player_Score = new Score(playerScore, PLAYER_COLOR, right);
+  gameOver = new GameOver(gameOverScore);
 }
 //------------------------------------------------------------------------------------//
 // draw()
@@ -74,6 +92,8 @@ void draw() {
   rightPaddle.update();
   ball.update();
 
+  
+
   // Check if the ball has collided with either paddle
   ball.collide(leftPaddle);
   ball.collide(rightPaddle);
@@ -85,10 +105,18 @@ void draw() {
     ball.reset();
   }
 
-  // Display the paddles and the ball
+  // Display the paddles, score  and the ball
+  
   leftPaddle.display();
+  enme_Score.display();
   rightPaddle.display();
+  player_Score.display();
+  if (gameOverScore > 10)
+  gameOver.display();
   ball.display();
+  
+  
+    
 }
 //------------------------------------------------------------------------------------//
 // keyPressed()
@@ -127,7 +155,7 @@ Brief
 You have five tasks to complete the project, each one involves editing and changing the
 existing code.
 
-1.
+1. DONE
 Track and display the score
 2.
 Detect when the game is over and show who won

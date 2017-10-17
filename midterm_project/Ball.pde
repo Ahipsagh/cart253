@@ -25,6 +25,10 @@ class Ball {
   // The colour of the ball
   color ballColor = color(255);
 
+  // Scoring
+  int playerScore=0;
+  int enmeScore=0;
+
 
   /////////////// Constructor ///////////////
 
@@ -86,70 +90,71 @@ class Ball {
   // something like an int (e.g. 0 = not off, 1 = off left, 2 = off right)
   // or a String (e.g. "ON SCREEN", "OFF LEFT", "OFF RIGHT")
 
-   boolean isOffScreen() 
+  boolean isOffScreen() 
+  {
+    screenLeftRight();
+    return (x + SIZE/2 < 0 || x - SIZE/2 > width);
+  }
+
+  void screenLeftRight() 
+  {
+    // ball went off either left(=1) or right(=2)  
+
+    if (x + SIZE/2 < 0)
     {
-      screenLeftRight();
-      return (x + SIZE/2 < 0 || x - SIZE/2 > width);
+      offScreen=1;
+      player_Score.update();
+
+      println("-------Player Scores here----------Left off screen" + playerScore + " " + offScreen );
+    } else if (x - SIZE/2 > width) {
+      offScreen=2;
+      enme_Score.update();
+      println("right off screen" + enmeScore + " " + playerScore);
     }
-void screenLeftRight() 
-{
-// ball went off either left(=1) or right(=2)  
+  }
 
-  if (x + SIZE/2 < 0)
-  {
-    offScreen=1;
-    println("---------------------------------------Left off screen" + (x-SIZE/2)+ " " + offScreen );
-    
-  } else
-    if (x - SIZE/2 > width);
-  {
-    offScreen=2;
-//    println("right off screen" + (x - SIZE/2)+ " " + offScreen);
-  } 
-}
-    
-//------------------------------------------------------------------------------------//
-// collide(Paddle paddle)
-//------------------------------------------------------------------------------------//
-//
-// Checks whether this ball is colliding with the paddle passed as an argument
-// If it is, it makes the ball bounce away from the paddle by reversing its
-// x velocity
+  //------------------------------------------------------------------------------------//
+  // collide(Paddle paddle)
+  //------------------------------------------------------------------------------------//
+  //
+  // Checks whether this ball is colliding with the paddle passed as an argument
+  // If it is, it makes the ball bounce away from the paddle by reversing its
+  // x velocity
 
-void collide(Paddle paddle) {
-  // Calculate possible overlaps with the paddle side by side
-  boolean insideLeft = (x + SIZE/2 > paddle.x - paddle.WIDTH/2);
-  boolean insideRight = (x - SIZE/2 < paddle.x + paddle.WIDTH/2);
-  boolean insideTop = (y + SIZE/2 > paddle.y - paddle.HEIGHT/2);
-  boolean insideBottom = (y - SIZE/2 < paddle.y + paddle.HEIGHT/2);
+  void collide(Paddle paddle) {
+    // Calculate possible overlaps with the paddle side by side
+    boolean insideLeft = (x + SIZE/2 > paddle.x - paddle.WIDTH/2);
+    boolean insideRight = (x - SIZE/2 < paddle.x + paddle.WIDTH/2);
+    boolean insideTop = (y + SIZE/2 > paddle.y - paddle.HEIGHT/2);
+    boolean insideBottom = (y - SIZE/2 < paddle.y + paddle.HEIGHT/2);
 
-  // Check if the ball overlaps with the paddle
-  if (insideLeft && insideRight && insideTop && insideBottom) {
-    // If it was moving to the left
-    if (vx < 0) {
-      // Reset its position to align with the right side of the paddle
-      x = paddle.x + paddle.WIDTH/2 + SIZE/2;
-    } else if (vx > 0) {
-      // Reset its position to align with the left side of the paddle
-      x = paddle.x - paddle.WIDTH/2 - SIZE/2;
+    // Check if the ball overlaps with the paddle
+    if (insideLeft && insideRight && insideTop && insideBottom) {
+      // If it was moving to the left
+      if (vx < 0) {
+        // Reset its position to align with the right side of the paddle
+        x = paddle.x + paddle.WIDTH/2 + SIZE/2;
+      } else if (vx > 0) {
+        // Reset its position to align with the left side of the paddle
+        x = paddle.x - paddle.WIDTH/2 - SIZE/2;
+      }
+      // And make it bounce
+      vx = -vx;
     }
-    // And make it bounce
-    vx = -vx;
+  }
+  //------------------------------------------------------------------------------------//
+  // display()
+  //------------------------------------------------------------------------------------//
+  //
+  // Draw the ball at its position
+
+  void display() {
+    // Set up the appearance of the ball (no stroke, a fill, and rectMode as CENTER)
+    noStroke();
+    fill(ballColor);
+    rectMode(CENTER);
+
+    // Draw the ball
+    rect(x, y, SIZE, SIZE);
   }
 }
-//------------------------------------------------------------------------------------//
-// display()
-//------------------------------------------------------------------------------------//
-//
-// Draw the ball at its position
-
-void display() {
-  // Set up the appearance of the ball (no stroke, a fill, and rectMode as CENTER)
-  noStroke();
-  fill(ballColor);
-  rectMode(CENTER);
-
-  // Draw the ball
-  rect(x, y, SIZE, SIZE);
-}
-  }
