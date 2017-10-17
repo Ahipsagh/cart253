@@ -15,6 +15,7 @@
 color backgroundColor = color(200, 150, 150);
 Bouncer bouncer;
 Bouncer bouncer2;
+Bouncer bouncer3;
 
 //------------------------------------------------------------------------------------//
 // M A I N
@@ -38,6 +39,8 @@ void setup() {
   //
    bouncer = new Bouncer(width/2,height/2,2,2,50,color(150,0,0,50),color(255,0,0,50));
    bouncer2 = new Bouncer(width/2,height/2,-2,2,50,color(0,0,150,50),color(0,0,255,50));
+   bouncer3 = new Bouncer(width/2,height/2,-2,2,50,color(50,0,150,50),color(0,200,255,50));
+ 
   //ah int tempX     = width/2;
   //ah int tempY     = height/2;
   //ah  int tempVX    = 2;
@@ -53,8 +56,10 @@ void setup() {
 void draw() {
   bouncer.update();
   bouncer2.update();
+    bouncer3.update();
   bouncer.draw();
   bouncer2.draw();
+ bouncer3.draw();
 }
 //------------------------------------------------------------------------------------//
 // P R O G R A M   E N D
@@ -110,5 +115,5 @@ void draw() {
 // Challenge: Can you make another class called something like RandomMover that has a shape that moves randomly around on
 // the screen (not teleporting but choosing a random direction to move in)? Maybe you could have it move like the Bouncer
 // but choose a new direction to move every few seconds?
-//
+// Added bouncer # 3 for fun
 //--END of requirements by Pippin Barr -------------------------------------------------------------------------------//
