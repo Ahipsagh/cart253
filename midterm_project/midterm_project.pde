@@ -54,7 +54,7 @@ color ENME_COLOR = color(255,0,0);
 color PLAYER_COLOR = color(0,0,255);
 
  // Image
-  PImage img;
+  PImage[] aFish = new PImage[7];
 
 //------------------------------------------------------------------------------------//
 // setup()
@@ -65,7 +65,12 @@ color PLAYER_COLOR = color(0,0,255);
 void setup() {
   // Set the size
   size(640, 480);
-
+  // Load fish images into array
+   
+   for (int i= 0; i< aFish.length; i++)
+{
+  aFish[i] = loadImage("fish"+i+".png");
+}
   // Create the paddles on either side of the screen. 
   // Use PADDLE_INSET to to position them on x, position them both at centre on y
   // Also pass through the two keys used to control 'up' and 'down' respectively
@@ -75,10 +80,10 @@ void setup() {
   rightPaddle = new Paddle(width - PADDLE_INSET, height/2, '0', 'p',PLAYER_COLOR);
 
   // Create the ball at the centre of the screen
-  ball = new Ball(width/2, height/2);
-   // Image
-   size(50,50);
-  img = loadImage("fish.gif");
+  int index = int(random(0, aFish.length));
+  ball = new Ball(aFish[index], width/2, height/2);
+  
+ 
   
   // Create enme and player Score
   enme_Score = new Score(enmeScore, ENME_COLOR, left, winner);
@@ -179,7 +184,7 @@ existing code.
 Track and display the score
 2. DONE
 Detect when the game is over and show who won
-3. 
+3. DONE
 Change the way the game looks
 4.
 Change the way the player controls the game

@@ -11,7 +11,7 @@ class Ball {
 
   // Default values for speed and size
   int SPEED = 5;
-  int SIZE = 16;
+  int SIZE = (int) random (16,50);
 
   // The location of the ball
   int x;
@@ -44,11 +44,12 @@ class Ball {
   // NOTE that I'm using an underscore in front of the arguments to distinguish
   // them from the class's properties
 
-  Ball(int _x, int _y) {
+  Ball(PImage _img, int _x, int _y) {
     x = _x;
     y = _y;
     vx = SPEED;
     vy = SPEED;
+    img=_img;
   }
 
 
@@ -165,14 +166,15 @@ class Ball {
 
   void display() {
     // Set up the appearance of the ball (no stroke, a fill, and rectMode as CENTER)
-    noStroke();
-    fill(ballColor);
-    rectMode(CENTER);
+//    noStroke();
+//    fill(ballColor);
+//    rectMode(CENTER);
 
 //    // Draw the ball
 //    rect(x, y, SIZE, SIZE);
 // Load a image on the screen
-image(img,x,y);
+imageMode(CENTER);
+image(img,x,y, SIZE, SIZE);
 
   }
 }
