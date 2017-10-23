@@ -22,7 +22,7 @@ int gridSize = 20;
 Griddie[] griddies = new Griddie[10];
 
 // Image
-PImage[] aFish = new PImage[6];
+PImage[] aFish = new PImage[7];
 int ranLength = int(random(1, aFish.length));  // random number of fish
 Fish[] rFish=new Fish[ranLength];
 boolean isFish =false;   // control collision with creature fish
@@ -51,9 +51,7 @@ void setup() {
   for (int i= 0; i< ranLength; i++)
   {
     // Create the Griddie at the centre of the screen
-    int index = int(random(0, rFish.length));   // random fish pictures
-
-    //Griddie = new Griddie(aFish[index], width/2, height/2);
+    int index = int(random(0, aFish.length));   // random fish pictures
     rFish[i] = new Fish(aFish[index], width/2, height/2);
   }
 
@@ -75,42 +73,67 @@ void draw() {
   background(50);
 
   // We need to loop through all the griddies one by one
-  for (int i = 0; i < griddies.length; i++)
-  {
-//    println(griddies.length + " i=" + i );
-    // Update the griddies
-    griddies[i].update();
-      for (int f= 0; f< ranLength; f++)
-        {    
-            //      griddies[i].collide(aFish[f]);
- //           println(rFish[f] + "griddies-j=" + "rFish=" + f + "griddies-i=" + i);
-            rFish[f].update();
-            isFish = true;
-            griddies[i].collide(griddies[f]);
-            // Display the creature aFish
-            rFish[f].display();
-        }
-       
-    // Now go through all the griddies a second time...
-    for (int j = 0; j < griddies.length; j++)
+  //  for (int i = 0; i < griddies.length; i++)
+  //  {
+  //    println(griddies.length + " i=" + i );
+  // Update the griddies
+  //   griddies[i].update();
+  //     for (int ii = 0; ii < griddies.length; ii++)
+  // {
+
+  for (int f= 0; f< ranLength; f++)
+  {  
+    rFish[f].update(); 
+    for (int ii = 0; ii < griddies.length; ii++)
+            
     {
-      // QUESTION: What is this if-statement for?
-      // This is to create another array of griddies for the purpose of determining if 
-      // if any of the griddies had collided (ie. same (x,y) coordinates) with one another.
-      // Each griddie in array "i" is compared to the entire array copied into array "j" to
-      // the exclusion of itself.
-      if (j != i)
-      {
-        // QUESTION: What does this line check?
-        // As long as the griddie you compare to is not equal to itself ( which means that they 
-        // have the same (x,y) coordinates ), go ahead and check for collision.  
-        griddies[i].collide(griddies[j]);
- 
+
+      int rangeX = rFish[f].x - griddies[ii].x;
+      int rangeY = rFish[f].y - griddies[ii].y;
+      if (abs(rangeX) <= 15 && abs(rangeY)<=15)
+ //          if (rFish[f].x == griddies[ii].x && rFish[f].y == griddies[ii].y)
+      { 
+        isFish=true;
+        println("Helloooooooooooooooooooo");
+              println("f=" + f+ "fish=" +rFish[f].x+ "ii=" + ii + "griddie=" +griddies[ii].x);
+              griddies[ii].dead();
+              if (isFish==true)
+      rFish[f].collide(rFish[f]);      
       }
+
+      
+
+      // Display the creature aFish
+      rFish[f].display();
+    }
+  }
+
+
+
+for (int i = 0; i < griddies.length; i++)
+{
+//  println(griddies.length + " i=" + i );
+  // Update the griddies
+  griddies[i].update();  
+  // Now go through all the griddies a second time...
+  for (int j = 0; j < griddies.length; j++)
+  {
+    // QUESTION: What is this if-statement for?
+    // This is to create another array of griddies for the purpose of determining if 
+    // if any of the griddies had collided (ie. same (x,y) coordinates) with one another.
+    // Each griddie in array "i" is compared to the entire array copied into array "j" to
+    // the exclusion of itself.
+    if (j != i)
+    {
+      // QUESTION: What does this line check?
+      // As long as the griddie you compare to is not equal to itself ( which means that they 
+      // have the same (x,y) coordinates ), go ahead and check for collision.  
+      griddies[i].collide(griddies[j]);
     }
     // Display the griddies
     griddies[i].display();
   }
+}
 }
 //------------------------------------------------------------------------------------//
 // P R O G R A M   E N D
@@ -142,7 +165,7 @@ Exercise Steps
  number of these creature in an array in the main program in the same way as the Griddies 
  (make sure you update and display your new creatures)
  
- 5.
+ 5. DONE
  Commit this change with a message like "Added new creature" and a description of the 
  creature.
  

@@ -10,13 +10,13 @@ class Fish {
   /////////////// Properties ///////////////
 
   // Default values for speed and size
-  int speedX = (int) random(1,3);
-  int speedY = (int) random(1,5);
-  int size = (int) random (16,50);
+  int speedX = (int) random(1, 3);
+  int speedY = (int) random(1, 5);
+  int size = (int) random (2, 40);
 
   // The location of the fish
-  int x = (int) random (0,width-100);
-  int y = (int) random (0,height-100);
+  int x = (int) random (0, width-100);
+  int y = (int) random (0, height-100);
   int offScreen=0; //0=on screen, 1=left 2=off right
 
   // The velocity of the fish
@@ -61,31 +61,20 @@ class Fish {
 
   void update() {
     // First update the location based on the velocity (so the fish moves)
-    x += vx  + (int) random(-4,1);
-    y += vy  + (int) random(-3,-1);
-   if (x < 0) {
+    x += vx  + (int) random(-7, 6);
+    y += vy  + (int) random(-5, 9);
+    if (x < 0) {
       x += width;
-  //    fill = color(0,0,255);
-  //    println(" is off the right" );
-    }
-    else if (x >= width) {
+    } else 
+    if (x >= width) {
       x -= width;
-  //          fill = color(255,0,0);
-  //    println("-----------left" );
     }
     if (y < 0) {
       y += height;
-
-   //               fill = color(0,0,0);
-   //   println("---bottom" );
-    }
-    else if (y >= height) {
+    } else 
+    if (y >= height) {
       y -= height;
-
- //              fill = color(0,255,0);
- println("-top" );
     }
-
   }
   //------------------------------------------------------------------------------------//
   // reset()
@@ -98,27 +87,54 @@ class Fish {
     x = width/2;
     y = height/2;
   }
-
-  //------------------------------------------------------------------------------------//
-  // display()
-  //------------------------------------------------------------------------------------//
+  // collide(other)
   //
-  // Draw the fish at its position
-
-  void display() {
-    // Set up the appearance of the fish (no stroke, a fill, and rectMode as CENTER)
-//    noStroke();
-//    fill(fishColor);
-//    rectMode(CENTER);
-
-    // Draw the fish
-
-// Load a image on the screen
-x = x + (int) random(-2,2);  // make the fish gittery
-y = y + (int) random(-2,2);
-imageMode(CENTER);
-image(img,x,y, size, size);
-    rect(x, y, size, size);
-
+  // Checks for collision with the other Griddie
+  // and updates energy level
+  //------------------------------------------------------------------------------------//
+  void collide(Fish other) {
+  //------------------------------------------------------------------------------------//
+    // QUESTION: What is this if-statement for?
+    // if either one of the Griddies that collided have an energy level of 0 (death) go back to the main
+    // program exercise04
+    // QUESTION: What does this if-statement check?
+    // if both Griddies are located at the same (x,y) coordinates then they have collided and 
+    // get an energy increase
+    // 
+    println("im in");
+ //   if (x == other.x && y == other.y )
+   // {
+      
+      println(" Hit a FISH Griddie-Fish x =" + x + other.x + " Griddie-Fish y = " + y + other.y);
+      // set Griddie energy to 0 (death) and increase aFish size
+      //ah     size += collideEnergy;
+      size+=100;
+      isFish=false;
+     // Constrain the energy level to be within bounds
+      //size = constrain(size,0,100);
+  //    energy = 0;
+   // }
   }
+  
+    //------------------------------------------------------------------------------------//
+    // display()
+    //------------------------------------------------------------------------------------//
+    //
+    // Draw the fish at its position
+
+    void display() {
+      // Set up the appearance of the fish (no stroke, a fill, and rectMode as CENTER)
+      //    noStroke();
+      //    fill(fishColor);
+      //    rectMode(CENTER);
+
+      // Draw the fish
+
+      // Load a image on the screen
+      x = x + (int) random(-2, 2);  // make the fish gittery
+      y = y + (int) random(-2, 2);
+      imageMode(CENTER);
+      image(img, x, y, size, size);
+      //   rect(x, y, size, size);
+    }
 }
