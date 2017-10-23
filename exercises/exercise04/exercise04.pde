@@ -20,6 +20,11 @@
 int gridSize = 20;
 // An array storing all the griddies
 Griddie[] griddies = new Griddie[10];
+
+ // Image
+  PImage[] aFish = new PImage[6];
+  Fish[] rFish=new Fish[6];
+  int ranLength = int(random(1, aFish.length));  // random number of fish
 //------------------------------------------------------------------------------------//
 // M A I N
 // this is the main program that invokes the Griddie Class by passing attributes
@@ -34,6 +39,22 @@ void setup() {
 // Set up the window size and framerate (lower so we can watch easier)
   size(640, 480);
   frameRate(10);
+  
+    // Load fish images into array
+   
+   for (int i= 0; i< aFish.length; i++)
+{
+  aFish[i] = loadImage("fish"+i+".png");  // loading the array with fish pics
+}
+// add new creature fish
+     for (int i= 0; i< ranLength; i++)
+{
+  // Create the Griddie at the centre of the screen
+  int index = int(random(0, aFish.length));   // random fish pictures
+  
+  //Griddie = new Griddie(aFish[index], width/2, height/2);
+  rFish[i] = new Fish(aFish[index], width/2, height/2);
+}
 
   // QUESTION: What does this for loop do?
   // Load the array of griddies into the array of 100 griddies at grid size 20 and random x, y coordinates.
@@ -42,6 +63,8 @@ void setup() {
     int y = floor(random(0, height/gridSize));
     griddies[i] = new Griddie(x * gridSize, y * gridSize, gridSize);
   }
+  
+
 }
 
 // draw()
@@ -73,7 +96,11 @@ background(50);
         griddies[i].collide(griddies[j]);
       }
     }
-    
+    // Display the creature aFish
+      for (int f= 0; f< ranLength; f++)
+{
+  rFish[f].display();
+}   
     // Display the griddies
     griddies[i].display();
   }
