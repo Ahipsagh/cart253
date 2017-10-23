@@ -3,19 +3,20 @@
 //------------------------------------------------------------------------------------//
 //
 // A class that defines a fish that can move around in the window, bouncing
-// of the top and bottom, and can detect collision with a griddies and bounce off that.
+// of the top and bottom, and can detect collision with a rFish and bounce off that.
 //------------------------------------------------------------------------------------//
 class Fish {
   //------------------------------------------------------------------------------------//
   /////////////// Properties ///////////////
 
   // Default values for speed and size
-  int SPEED = (int) random(1,7);
+  int speedX = (int) random(1,3);
+  int speedY = (int) random(1,5);
   int size = (int) random (16,50);
 
   // The location of the fish
-  int x;
-  int y;
+  int x = (int) random (0,width-100);
+  int y = (int) random (0,height-100);
   int offScreen=0; //0=on screen, 1=left 2=off right
 
   // The velocity of the fish
@@ -25,10 +26,6 @@ class Fish {
   // The colour of the fish
   color fishColor = color(255);
 
-  // Scoring
-  int playerScore=0;
-  int enmeScore=0;
-  
   // Image
   PImage img;
 
@@ -39,7 +36,7 @@ class Fish {
   //
   // The constructor sets the variable to their starting values
   // x and y are set to the arguments passed through (from the main program)
-  // and the velocity starts at SPEED for both x and y 
+  // and the velocity starts at speed for both x and y 
   // (so the fish starts by moving down and to the right)
   // NOTE that I'm using an underscore in front of the arguments to distinguish
   // them from the class's properties
@@ -47,8 +44,8 @@ class Fish {
   Fish(PImage _img, int _x, int _y) {
     x = _x;
     y = _y;
-    vx = SPEED;
-    vy = SPEED;
+    vx = speedX;
+    vy = speedY;
     img=_img;
   }
 
@@ -59,19 +56,36 @@ class Fish {
   //------------------------------------------------------------------------------------//
   //
   // This is called by the main program once per frame. It makes the fish move
-  // and also checks whether it should bounce of the top or bottom of the screen
+  // and also checks whether it should bounce off the top or bottom of the screen
   // and whether the fish has gone off the screen on either side.
 
   void update() {
     // First update the location based on the velocity (so the fish moves)
-    x += vx;
-    y += vy;
-
-    // Check if the fish is going off the top of bottom
-    if (y - size/2 < 0 || y + size/2 > height) {
-      // If it is, then make it "bounce" by reversing its velocity
-      vy = -vy;
+    x += vx  + (int) random(-4,1);
+    y += vy  + (int) random(-3,-1);
+   if (x < 0) {
+      x += width;
+  //    fill = color(0,0,255);
+  //    println(" is off the right" );
     }
+    else if (x >= width) {
+      x -= width;
+  //          fill = color(255,0,0);
+  //    println("-----------left" );
+    }
+    if (y < 0) {
+      y += height;
+
+   //               fill = color(0,0,0);
+   //   println("---bottom" );
+    }
+    else if (y >= height) {
+      y -= height;
+
+ //              fill = color(0,255,0);
+ println("-top" );
+    }
+
   }
   //------------------------------------------------------------------------------------//
   // reset()
@@ -84,81 +98,7 @@ class Fish {
     x = width/2;
     y = height/2;
   }
-  //------------------------------------------------------------------------------------//
-  // isOffScreen()
-  //------------------------------------------------------------------------------------//
-  //
-  // Returns true if the fish is off the left or right side of the window
-  // otherwise false
-  // (If we wanted to return WHICH side it had gone off, we'd have to return
-  // something like an int (e.g. 0 = not off, 1 = off left, 2 = off right)
-  // or a String (e.g. "ON SCREEN", "OFF LEFT", "OFF RIGHT")
 
-  boolean isOffScreen() 
-  {
-    screenLeftRight();
-    return (x + size/2 < 0 || x - size/2 > width);
-  }
-
-  void screenLeftRight() 
-  {
-    // fish went off either left(=1) or right(=2)  
-
-    if (x + size/2 < 0)
-    {
-      offScreen=1;
- //     player_Score.update();
-  //    println("player wins" + enmeScore + " " + playerScore);
-      if (playerScore == 10) 
-     {
-  //      gameIsOver = true;
- //       winner = true;
-    }
-
- //     println("-------Player Scores here----------Left off screen" + playerScore + " " + offScreen );
-    } else if (x - size/2 > width) {
-      offScreen=2;
- //     enme_Score.update();
- //     println("enemy *****" + enmeScore + " " + enme_Score);
-      if (enmeScore == 10) 
-      {
- //       gameIsOver = true;
- //       winner = true;
-      }
-//      println("right off screen" + enmeScore + " " + playerScore);
-    }
-  }
-
-  //------------------------------------------------------------------------------------//
-  // collide(griddies griddies)
-  //------------------------------------------------------------------------------------//
-  //
-  // Checks whether this fish is colliding with the griddies passed as an argument
-  // If it is, it makes the fish bounce away from the griddies by reversing its
-  // x velocity
-
- /* void collide(Fish griddies) {
-    // Calculate possible overlaps with the griddies side by side
-    boolean insideLeft = (x + size/2 > griddies.x - griddies.width/2);
-    boolean insideRight = (x - size/2 < griddies.x + griddies.width/2);
-    boolean insideTop = (y + size/2 > griddies.y - griddies.height/2);
-    boolean insideBottom = (y - size/2 < griddies.y + griddies.height/2);
-
-    // Check if the fish overlaps with the griddies
-    if (insideLeft && insideRight && insideTop && insideBottom) {
-      // If it was moving to the left
-      if (vx < 0) {
-        // Reset its position to align with the right side of the griddies
-        x = griddies.x + griddies.width/2 + size/2;
-      } else if (vx > 0) {
-        // Reset its position to align with the left side of the griddies
-        x = griddies.x - griddies.width/2 - size/2;
-      }
-      // And make it bounce
-      vx = -vx;
-    }
-  }
-  */
   //------------------------------------------------------------------------------------//
   // display()
   //------------------------------------------------------------------------------------//
@@ -171,13 +111,14 @@ class Fish {
 //    fill(fishColor);
 //    rectMode(CENTER);
 
-//    // Draw the fish
-//    rect(x, y, size, size);
+    // Draw the fish
+
 // Load a image on the screen
 x = x + (int) random(-2,2);  // make the fish gittery
 y = y + (int) random(-2,2);
 imageMode(CENTER);
 image(img,x,y, size, size);
+    rect(x, y, size, size);
 
   }
 }

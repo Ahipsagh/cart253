@@ -104,6 +104,36 @@ class Griddie {
     // QUESTION: What is this if-statement for?
     // if either one of the Griddies that collided have an energy level of 0 (death) go back to the main
     // program exercise04
+    if ( isFish )
+    {
+  
+      // QUESTION: What is this if-statement for?
+    // if either one of the Griddies that collided have an energy level of 0 (death) go back to the main
+    // program exercise04
+    if (energy == 0) {
+      isFish = false;
+      return;
+    }
+    
+    // QUESTION: What does this if-statement check?
+    // if both Griddies are located at the same (x,y) coordinates then they have collided and 
+    // get an energy increase
+    // 
+    if (x == other.x && y == other.y) {
+       println(" Hit a FISH Griddie-Fish x =" + x + other.x + " Griddie-Fish y = " + y + other.y);
+      // set Griddie energy to 0 (death) and increase aFish size
+ //ah     size += collideEnergy;
+ size += 100;
+
+      // Constrain the energy level to be within bounds
+      //energy = constrain(energy,0,maxEnergy);
+      energy = 0;
+      isFish = false;
+    }
+      
+    }
+    else if (! isFish ) {
+//      println("Griddie Time");
     if (energy == 0 || other.energy == 0) {
       return;
     }
@@ -118,8 +148,36 @@ class Griddie {
       // Constrain the energy level to be within bounds
       energy = constrain(energy,0,maxEnergy);
     }
+    }
   }
-
+  /*
+  // collide(aFish)
+  //
+  // Checks for collision with aFish
+  // and updates energy level
+  //------------------------------------------------------------------------------------//
+  void collide(Griddie aFish) {
+  //------------------------------------------------------------------------------------//
+    // QUESTION: What is this if-statement for?
+    // if either one of the Griddies that collided have an energy level of 0 (death) go back to the main
+    // program exercise04
+    if (energy == 0) {
+      return;
+    }
+    
+    // QUESTION: What does this if-statement check?
+    // if both Griddies are located at the same (x,y) coordinates then they have collided and 
+    // get an energy increase
+    // 
+    if (x == aFish.x && y == aFish.y) {
+      // set Griddie energy to 0 (death) and increase aFish size
+      aFish[i].size += collideEnergy;
+      // Constrain the energy level to be within bounds
+      //energy = constrain(energy,0,maxEnergy);
+      energy = 0;
+    }
+  }
+*/
   // display()
   //
   // Draw the Griddie on the screen as a rectangle
