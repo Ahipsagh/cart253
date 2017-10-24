@@ -92,7 +92,7 @@ class Fish {
   // Checks for collision with the other Griddie
   // and updates energy level
   //------------------------------------------------------------------------------------//
-  void collide(Fish other) {
+  void collide(Griddie other) {
   //------------------------------------------------------------------------------------//
     // QUESTION: What is this if-statement for?
     // if either one of the Griddies that collided have an energy level of 0 (death) go back to the main
@@ -102,17 +102,21 @@ class Fish {
     // get an energy increase
     // 
     println("im in");
- //   if (x == other.x && y == other.y )
-   // {
-      
-      println(" Hit a FISH Griddie-Fish x =" + x + other.x + " Griddie-Fish y = " + y + other.y);
+    
+    float fishDist=dist(x,y,other.x,other.y);
+          if (fishDist < 50 && other.energy> 0) { 
+     isFish=true; 
+        other.energy = 0;
+   println(" Hit a FISH Griddie-Fish x =" + x + other.x + " Griddie-Fish y = " + y + other.y + " Distance=" + fishDist);
       // set Griddie energy to 0 (death) and increase aFish size
       //ah     size += collideEnergy;
-      size+=100;
-      isFish=false;
+      size+=70;
+     frameRate(1);
+          }else {
+      isFish=false;}
      // Constrain the energy level to be within bounds
       //size = constrain(size,0,100);
-  //    energy = 0;
+  
    // }
   }
   

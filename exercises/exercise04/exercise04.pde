@@ -71,45 +71,33 @@ void setup() {
 void draw() {
   //------------------------------------------------------------------------------------//
   background(50);
-
-  // We need to loop through all the griddies one by one
-  //  for (int i = 0; i < griddies.length; i++)
-  //  {
-  //    println(griddies.length + " i=" + i );
-  // Update the griddies
-  //   griddies[i].update();
-  //     for (int ii = 0; ii < griddies.length; ii++)
-  // {
-
+ 
+// Fish
   for (int f= 0; f< ranLength; f++)
   {  
     rFish[f].update(); 
     for (int ii = 0; ii < griddies.length; ii++)
             
     {
-
-      int rangeX = rFish[f].x - griddies[ii].x;
-      int rangeY = rFish[f].y - griddies[ii].y;
-      if (abs(rangeX) <= 15 && abs(rangeY)<=15)
- //          if (rFish[f].x == griddies[ii].x && rFish[f].y == griddies[ii].y)
-      { 
-        isFish=true;
-        println("Helloooooooooooooooooooo");
-              println("f=" + f+ "fish=" +rFish[f].x+ "ii=" + ii + "griddie=" +griddies[ii].x);
-              griddies[ii].dead();
-              if (isFish==true)
-      rFish[f].collide(rFish[f]);      
-      }
-
+       
+ //     int rangeX = rFish[f].x - griddies[ii].x;
+ //     int rangeY = rFish[f].y - griddies[ii].y;
       
 
-      // Display the creature aFish
+ //    if (abs(rangeX) <= 15 && abs(rangeY)<=15)
+ //          if (rFish[f].x == griddies[ii].x && rFish[f].y == griddies[ii].y)
+      { 
+ //       isFish=true;
+ //       println("Helloooooooooooooooooooo");
+ //             println("f=" + f+ "fish=" +rFish[f].x+ "ii=" + ii + "griddie=" +griddies[ii].x);
+ //             griddies[ii].dead();
+  //            if (isFish==true)
+      rFish[f].collide(griddies[ii]);      
+      }
+    // Display the creature aFish
       rFish[f].display();
     }
   }
-
-
-
 for (int i = 0; i < griddies.length; i++)
 {
 //  println(griddies.length + " i=" + i );
@@ -149,7 +137,7 @@ Exercise Steps
  two files this time, so you'll need to add a tab called Griddie and put the appropriate 
  code in it too.)
  
- 1. DONE
+ 1. DONEs
  Commit this change with a message like "Started exercise 04"
  
  2. DONE
@@ -169,11 +157,11 @@ Exercise Steps
  Commit this change with a message like "Added new creature" and a description of the 
  creature.
  
- 6.
+ 6. DONE
  If you haven't already, make the new creatures interact with the Griddies in some way that 
  you find interesting
  
- 7.
+ 7. DONE
  Commit this change with a message like "Added interaction between creatures" and a 
  description of the interaction
  
