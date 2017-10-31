@@ -45,7 +45,6 @@ for (int i= 0; i< fish.length; i++)
 {
 fish[i].ascend();
 fish[i].display();
-fish[i].top();
 }
 }
 /*
