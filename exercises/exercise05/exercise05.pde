@@ -8,11 +8,13 @@
 // email          : ani.ariane.hipsagh@gmail.com
 //
 //------------------------------------------------------------------------------------//
-// Exercise 05 Scale and Rotation example
+// Exercise 05 adding noise to Fish
 //------------------------------------------------------------------------------------//
-
-float theta1 = 0.0;
-float theta2 = 0.0;
+// using one of the sample pieces of code to have random fish float to the top of the 
+// screen and applying a random noise factor to their sizes.
+//
+// The random noise is applied to a fishing line as well.
+//
 
 PImage[] aFish = new PImage[7];
 
@@ -20,7 +22,7 @@ Fish[] fish= new Fish[4];
 
 void setup()
 {
-  size(500,500,P3D);
+  size(500,500);
 
 for (int i= 0; i< aFish.length; i++)
 {
@@ -29,25 +31,16 @@ for (int i= 0; i< aFish.length; i++)
 }
 for (int i= 0; i< fish.length; i++)
 {
+ // loading random fish images into an image array
   int index = int(random(0, aFish.length));
   fish[i] = new Fish(aFish[index], 100+i*100, 300, random (32, 72));
 }
 }
 
-void draw()
-{
-background(255);
-  background(0);
-  translate(250,250);
-  rotateY(theta1);
+void draw() {
+
+  background(255);
   
-  box(60);
-  translate(50,50);
-  rotateX(theta2);
-  
-  box(30);
-  theta1 += 0.01;
-  theta2 -= 0.01;
 for (int i= 0; i< fish.length; i++)
 {
 fish[i].ascend();
@@ -68,14 +61,14 @@ within it).
 
 Remember, too, that you must follow the basic process of:
 
-1.
+1.DONE
 Write some code that achieves part of your overall program and comment it
 Commit this code with a that describes what you added
 
-2.
+2.DONE
 Repeat
 
-3.
+3.DONE
 Then at the end (or throughout), don't forget to push your repository to github.com
 
 Don't write your entire exercise and then submit, break it into smaller commits. 
