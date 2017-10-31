@@ -14,10 +14,29 @@
 float theta1 = 0.0;
 float theta2 = 0.0;
 
-void setup() {
+PImage[] aFish = new PImage[7];
+
+Fish[] fish= new Fish[4];
+
+void setup()
+{
   size(500,500,P3D);
+
+for (int i= 0; i< aFish.length; i++)
+{
+  aFish[i] = loadImage("fish"+i+".png");
+
 }
-void draw() {
+for (int i= 0; i< fish.length; i++)
+{
+  int index = int(random(0, aFish.length));
+  fish[i] = new Fish(aFish[index], 100+i*100, 300, random (32, 72));
+}
+}
+
+void draw()
+{
+background(255);
   background(0);
   translate(250,250);
   rotateY(theta1);
@@ -29,6 +48,12 @@ void draw() {
   box(30);
   theta1 += 0.01;
   theta2 -= 0.01;
+for (int i= 0; i< fish.length; i++)
+{
+fish[i].ascend();
+fish[i].display();
+fish[i].top();
+}
 }
 /*
 //--Requirements as per Wiki --------------------------------------------------------//
