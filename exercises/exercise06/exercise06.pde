@@ -11,8 +11,6 @@
 // Exercise 06 Using the webcam as input to play with Bouncers.
 //------------------------------------------------------------------------------------//// Exercise 06
 //
-
-
 // Import the video library
 import processing.video.*;
 
@@ -116,31 +114,49 @@ void handleVideoInput() {
       }
     }
   }
+  
+   
+    for (  int x = 1; x < video.width; x++ ) {
+      for ( int y = 0; y < video.height; y++ ) {
+        float threshold = 100;
+        int loc = x + y*video.width;
+        color pix = video.pixels[loc];
+        int leftLoc = (x-1) + y*video.width;
+        color leftPix = video.pixels[leftLoc];
+        float diff = abs(brightness(pix) -  brightness(leftPix));
+        if ( diff > threshold ) {
+          video.pixels[loc] = color(255);
+        } else {
+          video.pixels[loc] = color(0);
+        }
+      }  
+    }
+  
 }
-//--Requirements as per Wiki --------------------------------------------------------//
-//
-/*
+  //--Requirements as per Wiki --------------------------------------------------------//
+  //
+  /*
 Because there isn't a set of steps to follow you should just make sure to follow the 
-basic process of using Git to track your work:
-
-1.
-Come up with an idea for part of your program
-
-2.
-Write some code that achieves that and comment it clearly
-
-3.
-Commit this code with a message that describes what you added
-
-4.
-Push your changes at regular intervals
-
-5.
-Repeat
-
-6.
-Then at the end (or throughout), don't forget to push your repository one last time 
-to github.com
--End----------------------------------------------------------------------------------//
-
-*/
+   basic process of using Git to track your work:
+   
+   1.
+   Come up with an idea for part of your program
+   
+   2.
+   Write some code that achieves that and comment it clearly
+   
+   3.
+   Commit this code with a message that describes what you added
+   
+   4.
+   Push your changes at regular intervals
+   
+   5.
+   Repeat
+   
+   6.
+   Then at the end (or throughout), don't forget to push your repository one last time 
+   to github.com
+   -End----------------------------------------------------------------------------------//
+   
+   */
