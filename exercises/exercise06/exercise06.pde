@@ -8,10 +8,10 @@
 // email          : ani.ariane.hipsagh@gmail.com
 //
 //------------------------------------------------------------------------------------//
-// Exercise 05 adding noise to Fish
+// Exercise 06 Using the webcam as input to play with Bouncers.
 //------------------------------------------------------------------------------------//// Exercise 06
 //
-// Using the webcam as input to play with Bouncers.
+
 
 // Import the video library
 import processing.video.*;
@@ -117,3 +117,30 @@ void handleVideoInput() {
     }
   }
 }
+//--Requirements as per Wiki --------------------------------------------------------//
+//
+/*
+Because there isn't a set of steps to follow you should just make sure to follow the 
+basic process of using Git to track your work:
+
+1.
+Come up with an idea for part of your program
+
+2.
+Write some code that achieves that and comment it clearly
+
+3.
+Commit this code with a message that describes what you added
+
+4.
+Push your changes at regular intervals
+
+5.
+Repeat
+
+6.
+Then at the end (or throughout), don't forget to push your repository one last time 
+to github.com
+-End----------------------------------------------------------------------------------//
+
+*/
