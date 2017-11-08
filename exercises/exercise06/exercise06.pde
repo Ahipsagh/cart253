@@ -139,19 +139,20 @@ void handleVideoInput() {
 Because there isn't a set of steps to follow you should just make sure to follow the 
    basic process of using Git to track your work:
    
-   1.
+   
+   1. DONE - Edge detection from slides
    Come up with an idea for part of your program
    
-   2.
+   2.DONE - copied code from slides to do black and white edge detection.
    Write some code that achieves that and comment it clearly
    
-   3.
+   3. DONE - lots of commits because I tried and undid a bunch of stuff.
    Commit this code with a message that describes what you added
    
-   4.
+   4. DONE - did it so many times that the webcam no longer wants to turn on.
    Push your changes at regular intervals
    
-   5.
+   5. DONE - will have to try on another computer.
    Repeat
    
    6.
