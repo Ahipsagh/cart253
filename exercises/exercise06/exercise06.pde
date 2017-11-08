@@ -115,10 +115,9 @@ void handleVideoInput() {
     }
   }
   
-   
-    for (  int x = 1; x < video.width; x++ ) {
+   for (  int x = 1; x < video.width; x++ ) {
       for ( int y = 0; y < video.height; y++ ) {
-        float threshold = 100;
+        float threshold = 120;
         int loc = x + y*video.width;
         color pix = video.pixels[loc];
         int leftLoc = (x-1) + y*video.width;

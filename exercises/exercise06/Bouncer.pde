@@ -75,8 +75,8 @@ class Bouncer {
   // Draw an ellipse in the Bouncer's location, with its size
   // and with its fill
   void display() {
-    noStroke();
+    stroke(2);
     fill(fillColor);
-    ellipse(x, y, size, size);
+    rect(x, y, size, size);
   }
 }
