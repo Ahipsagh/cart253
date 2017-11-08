@@ -154,7 +154,7 @@ Because there isn't a set of steps to follow you should just make sure to follow
    5. DONE - will have to try on another computer.
    Repeat
    
-   6.
+   6. I want to do more but definitely don't want to lose what is working now.
    Then at the end (or throughout), don't forget to push your repository one last time 
    to github.com
    -End----------------------------------------------------------------------------------//
