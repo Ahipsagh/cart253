@@ -10,42 +10,21 @@
 //
 //------------------------------------------------------------------------------------//
 import ddf.minim.*;
-import processing.sound.*;
-import ddf.minim.analysis.*; // We need this one for FFT
-Minim minim; // Minim has a special class to handle sound tasks
-AudioPlayer stereoSound; // And a separate class for something like an audio file
-//SoundFile song;
-AudioInput mic; // Microphone input
-FFT fft; // Fast Fourier Transforms
+Minim minim;
+AudioInput mic; // The class that lets us get at the microphone
 void setup() {
-  size(500, 500);
-  minim = new Minim(this); // Create Minim
-  mic = minim.getLineIn(); // Get the microphone
-  fft = new FFT(mic.bufferSize(), mic.sampleRate()); // Create our FFT
-// song = new SoundFile(this, "sounds/song.wav");
-//  song.loop();
-  stereoSound = minim.loadFile("sounds/stereo_sound_file.wav"); // Load our sound file
+  size(500,500);
+  minim = new Minim(this);
+  // We use minim.getLineIn() to get access to the microphone data
+  mic = minim.getLineIn();
 }
 void draw() {
   background(0);
-  fft.forward(mic.mix); // Apply the FFT to the current input
-  // Now go through the spectrum generated
-  for (int i = 0; i < fft.specSize(); i++) {
-    // Get the value of this band
-    float b = fft.getBand(i);
-    // Map the location in the spectrum to x
-    float x = map(i, 0, fft.specSize(), 0, width);
-    // Map the amplitude of the band to height
-    float h = map(b, 0, 10, 0, height);
-    // Draw a line representing this band
-    line(x,height - h,x,height);
-//    float newRate = map(mouseX,0,width,0.01,5);
-//    song.rate(newRate);
-  }
-}
-   void mouseClicked() {
-  stereoSound.loop(); // Now this works fine
-
+  rectMode(CENTER);
+  // Get the current level (volume) going into the microphone
+  float level = mic.mix.level();
+  // Draw a rectangle with dimensions defined by microphone level
+  rect(width/2, height/2, width * level*10, height * level*10);
 }
 /*------------------------------------------------------------------------------------//
 
