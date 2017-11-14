@@ -10,13 +10,17 @@
 //
 //------------------------------------------------------------------------------------//
 import ddf.minim.*;
+import processing.sound.*;
 Minim minim;
+SoundFile song;
 AudioInput mic; // The class that lets us get at the microphone
 void setup() {
   size(500,500);
   minim = new Minim(this);
   // We use minim.getLineIn() to get access to the microphone data
   mic = minim.getLineIn();
+  song = new SoundFile(this, "sounds/song.wav");
+  song.loop();
 }
 void draw() {
   background(0);
@@ -25,6 +29,9 @@ void draw() {
   float level = mic.mix.level();
   // Draw a rectangle with dimensions defined by microphone level
   rect(width/2, height/2, width * level*10, height * level*10);
+}
+void mouseClicked() {
+  song.stop(); // Make it stop! Make it stop!
 }
 /*------------------------------------------------------------------------------------//
 
