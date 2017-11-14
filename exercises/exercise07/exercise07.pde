@@ -103,10 +103,10 @@ void mouseClicked() {
  2. Done
  Commit this code with a message that describes what you added
  
- 3.
+ 3. Done
  Push your changes at regular intervals
  
- 4.
+ 4. Done
  Repeat
  
  Then at the end (or throughout), don't forget to push your repository one last time to github.com
