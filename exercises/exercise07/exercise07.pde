@@ -88,13 +88,19 @@ void mouseClicked() {
  a program that takes an image as input and turns it into music by translating the 
  colours of pixels into tones played by an oscillator.
  
+ Option two: create a small program that reacts to user input through the microphone. 
+ For example, you might use the Griddies code and add the idea that a Griddie gains 
+ energy when the user creates high-pitched noises. Or you might have a version of 
+ Pong where the paddles move faster or slower based on how loud the input into the 
+ microphone is.
+ 
  0. Done - Karaoke with volume control
  Come up with an idea for part of your program
  
  1. Done
  Write some code that achieves that and comment it clearly
  
- 2.
+ 2. Done
  Commit this code with a message that describes what you added
  
  3.
