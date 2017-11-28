@@ -21,14 +21,15 @@
 //------------------------------------------------------------------------------------//
 //
 // Global variables for the paddles and the Heart
-
+PImage img;
 PImage[] aHeart = new PImage[7];
 
 Heart[] Heart= new Heart[4];
 
 void setup()
 {
-  size(500,500);
+  size(1920,1080);
+  img = loadImage("background.png");
 
 for (int i= 0; i< aHeart.length; i++)
 {
@@ -44,8 +45,9 @@ for (int i= 0; i< Heart.length; i++)
 }
 
 void draw() {
-
-  background(255);
+  
+  background(127);
+    image(img,0,0);
   
 for (int i= 0; i< Heart.length; i++)
 {

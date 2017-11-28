@@ -26,14 +26,9 @@ class Heart {
 
   void display()
   {
-    // each Heart has a random noise factor subtracted from its random diameter
-    // and then it is displayed.  Notice the Hearting line.
-    y += vy; // increases the velocity by 2
-    xoff = xoff + .01;
-    float n = noise(xoff) * width;
-    line(n, 2, n, height);
-    imageMode(CENTER);
-    image(img, x, y, diameter-n, diameter-n);
+     y += vy; // increases the velocity by 2
+     imageMode(CENTER);
+    image(img, x, y, diameter, diameter);
   }
 
 }
