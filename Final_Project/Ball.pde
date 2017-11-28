@@ -1,6 +1,6 @@
-// Simple bouncing ball class
+// Simple bouncing HeartSprite class
 
-class Ball {
+class HeartSprite {
   
   float x;
   float y;
@@ -9,7 +9,7 @@ class Ball {
   float w;
   float life = 255;
   
-  Ball(float tempX, float tempY, float tempW) {
+  HeartSprite(float tempX, float tempY, float tempW) {
     x = tempX;
     y = tempY;
     w = tempW;
@@ -32,7 +32,7 @@ class Ball {
   }
   
   boolean finished() {
-    // Balls fade out
+    // HeartSprites fade out
     life--;
     if (life < 0) {
       return true;

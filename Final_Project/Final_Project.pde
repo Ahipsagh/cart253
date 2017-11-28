@@ -43,8 +43,8 @@ StopWatch timer = new StopWatch();
 float avatarSpeed = 50; 
 //Red Alert ends here.-----------------------------------Ok
 
-ArrayList<Ball> balls;
-int ballWidth = 100;
+ArrayList<HeartSprite> HeartSprites;
+int HeartSpriteWidth = 100;
 
 
 Heart[] Heart= new Heart[14];
@@ -65,11 +65,11 @@ void setup()
     Heart[i] = new Heart(aHeart[index], 100+i*100, 300, random (32, 72));
   }
   //Arraylist 
-  // Create an empty ArrayList (will store Ball objects)
-  balls = new ArrayList<Ball>();
+  // Create an empty ArrayList (will store HeartSprite objects)
+  HeartSprites = new ArrayList<HeartSprite>();
 
   // Start by adding one element
-  balls.add(new Ball(width/2, 0, ballWidth));
+  HeartSprites.add(new HeartSprite(width/2, 0, HeartSpriteWidth));
   //Arraylist ends
   //Red Alert ! -------------------- Sprite library stuff follows
   // Create our Sprite by providing "this", the file
@@ -85,13 +85,13 @@ void setup()
   //Red Alert ends here.-----------------------------------Ok
 }
 
-   //Add to the ArrayList by Clicking on mouse
-  void mousePressed() {
-    // A new ball object is added to the ArrayList (by default to the end)
-    println("add another ball");
-    balls.add(new Ball(mouseX, mouseY, ballWidth));
-  }
-  //ArrayList ends
+//Add to the ArrayList by Clicking on mouse
+void mousePressed() {
+  // A new HeartSprite object is added to the ArrayList (by default to the end)
+  println("add another HeartSprite");
+  HeartSprites.add(new HeartSprite(mouseX, mouseY, HeartSpriteWidth));
+}
+//ArrayList ends
 
 void draw() {
 
@@ -104,19 +104,19 @@ void draw() {
     Heart[i].display();
   }
   //ArrayList
-  // With an array, we say balls.length, with an ArrayList, we say balls.size()
+  // With an array, we say HeartSprites.length, with an ArrayList, we say HeartSprites.size()
   // The length of an ArrayList is dynamic
   // Notice how we are looping through the ArrayList backwards
   // This is because we are deleting elements from the list  
-  for (int i = balls.size()-1; i >= 0; i--) 
+  for (int i = HeartSprites.size()-1; i >= 0; i--) 
   { 
     // An ArrayList doesn't know what it is storing so we have to cast the object coming out
-    Ball ball = balls.get(i);
-    ball.move();
-    ball.display();
-    if (ball.finished()) {
+    HeartSprite HeartSprite = HeartSprites.get(i);
+    HeartSprite.move();
+    HeartSprite.display();
+    if (HeartSprite.finished()) {
       // Items can be deleted with remove()
-      balls.remove(i);
+      HeartSprites.remove(i);
     }
   }  
 
@@ -145,36 +145,35 @@ void draw() {
       // If they press left, set up the walking animation
       // (Tragically we only have animation for walking to
       // the right, so this avatar will have to moon walk.)
-      avatar.setFrameSequence(5, 8, 0.1);
+      avatar.setFrameSequence(4, 7, 0.1);
       // Set a negative velocity (so the avatar moves left)
       avatar.setVelXY(-avatarSpeed, 0);
     } else if (keyCode == RIGHT) {
       println("right");
       // If they press right, set the walking animation frames
-      avatar.setFrameSequence(12, 16, 0.1);
+      avatar.setFrameSequence(12, 15, 0.1);
       // And set a positive velocity
       avatar.setVelXY(avatarSpeed, 0);
     } else if (keyCode == UP) {
       println("up");
       // If they press up, set the walking animation frames
-      avatar.setFrameSequence(9, 12, 0.1);
+      avatar.setFrameSequence(8, 11, 0.1);
       // And set a positive velocity
       avatar.setVelXY(0, -avatarSpeed);
     } else if (keyCode == DOWN) {
       println("down");
       // If they press down, set the walking animation frames
-      avatar.setFrameSequence(1, 4, 0.1);
+      avatar.setFrameSequence(0, 3, 0.1);
       // And set a positive velocity
       avatar.setVelXY(0, avatarSpeed);
-    } else {
-      // If no key is pressed then return to the idel frame
-      avatar.setFrameSequence(1, 2);
-      // And turn off velocity
-      avatar.setVelXY(0, 0);
     }
+  } else {
+    // If no key is pressed then return to the idel frame
+    avatar.setFrameSequence(2, 3, 0.5);
+    // And turn off velocity
+    avatar.setVelXY(0, 0);
   }
   //Red Alert ends here.-----------------------------------Ok
-
 }
 /*
 //------------------------------------------------------------------------------------//
