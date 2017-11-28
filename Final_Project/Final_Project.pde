@@ -40,12 +40,12 @@ StopWatch timer = new StopWatch();
 // How fast the avatar mores (pixels per second)
 float avatarSpeed = 50; 
 
-Heart[] Heart= new Heart[4];
+Heart[] Heart= new Heart[14];
 
 void setup()
 {
   size(500, 500);
-  //  img = loadImage("background.png");
+    img = loadImage("background.png");
 
   for (int i= 0; i< aHeart.length; i++)
   {
@@ -74,7 +74,7 @@ void setup()
 void draw() {
 
   // background(127);
-  //   image(img,width/2,height/2);
+     image(img,width/2,height/2);
 
   for (int i= 0; i< Heart.length; i++)
   {

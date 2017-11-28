@@ -3,7 +3,7 @@ class Heart {
   float y;
   float vx;
   float vy = random(-1,2);
-  float diameter;
+  float diameter = random(20,60);
   PImage img;
   float xoff = random(-1, 10);
 
