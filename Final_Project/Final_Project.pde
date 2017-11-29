@@ -33,7 +33,12 @@ import sprites.maths.*;
 import sprites.utils.*;
 
 // Create a Sprite for our avatar
+
+//Sprite heartSprite;
 Sprite avatar;
+ArrayList<Sprite> heartSprite = new ArrayList<Sprite>();
+
+
 
 // Create a StopWatch to keep track of time passing
 // (So we know how fast the animation should run.)
@@ -92,7 +97,12 @@ void mousePressed() {
   HeartSprites.add(new HeartSprite(mouseX, mouseY, HeartSpriteWidth));
 }
 //ArrayList ends
-
+for (int i = heartsSprite.size() - 1; i >= 0; i--) {
+  Sprite heartSprite = (Sprite)heartSprite.get(i);
+  if (avatar.bb_collision(heartSprite)) {
+    heartSprite.remove(i);
+  }
+}
 void draw() {
 
   // background(127);
