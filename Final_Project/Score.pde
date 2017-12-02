@@ -34,7 +34,6 @@ class Score {
   // Display the scores
   //
   void display() {
-println("------------------------------------------------------------");
     //fill(0,255,0);
     //textSize(92);
     //text("Game Over", 80, 350); // Text on screen Game Over

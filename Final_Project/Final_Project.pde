@@ -42,9 +42,14 @@ import sprites.utils.*;
 
 
 // Create a Sprite for our avatar
+Sprite avatar;
+
+// Create a Sprite for our enemy
+Sprite enemy;
 
 //Sprite heartSprite;
-Sprite avatar;
+ArrayList<HeartSprite> heartSprites;
+int heartSpriteWidth =350;
 
 // Create a StopWatch to keep track of time passing
 // (So we know how fast the animation should run.)
@@ -52,10 +57,9 @@ StopWatch timer = new StopWatch();
 
 // How fast the avatar mores (pixels per second)
 float avatarSpeed = 50; 
+float enemySpeed = 25; 
 //Red Alert ends here.-----------------------------------Ok
 
-ArrayList<HeartSprite> heartSprites;
-int heartSpriteWidth =350;
 
 void setup()
 {
@@ -77,12 +81,19 @@ void setup()
   // with the spritesheet, the number of columns in the
   // sheet, the number of rows in the sheet, and the
   // z-depth of this sprite
-  avatar = new Sprite(this, "avatar.png", 4, 4, 0);
+   avatar = new Sprite(this, "avatar.png", 4, 4, 0);
   // Set the avatar's position on screen
   avatar.setXY(width/2, height-100); // on the floor of bedroom
   // Set the default (idle) frame sequence from the
   // sheet to animate
   avatar.setFrameSequence(1, 4);
+  // create enemy sprite follows
+  enemy = new Sprite(this, "enemy.png", 1, 1, 0);
+  // Set the avatar's position on screen
+  enemy.setXY(width/2, height-100); // on the floor of bedroom
+  // Set the default (idle) frame sequence from the
+  // sheet to animate
+  enemy.setFrameSequence(1, 1);
   //Red Alert ends here.-----------------------------------Ok
 
 
