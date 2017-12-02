@@ -103,7 +103,7 @@ void draw() {
   // The length of an ArrayList is dynamic
   // Notice how we are looping through the ArrayList backwards
   // This is because we are deleting elements from the list 
-  
+  score.display();
   for (int i = heartSprites.size()-1; i >0 ; i--) 
   { 
     HeartSprite heartSprite = heartSprites.get(i);

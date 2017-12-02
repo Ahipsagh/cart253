@@ -42,7 +42,7 @@ println("------------------------------------------------------------");
     PFont courierFont = createFont("Courier", 64); // Create a Courier font
     textFont(courierFont); // Use the new font
     textSize(45);
-    fill(0, 0, 0);
-    text(counter, 80, 350); // show counter on screen
+    fill(255, 255, 255);
+    text(counter, 370, 300); // show counter on screen
   }
 }
