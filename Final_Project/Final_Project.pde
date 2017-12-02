@@ -57,7 +57,7 @@ StopWatch timer = new StopWatch();
 
 // How fast the avatar mores (pixels per second)
 float avatarSpeed = 50; 
-float enemySpeed = 25; 
+float enemySpeed = 10; 
 //Red Alert ends here.-----------------------------------Ok
 
 
@@ -154,7 +154,13 @@ void draw() {
   } else if (avatar.getX() < 0) {
     avatar.setX(avatar.getX() + width);
   }
-
+  // If the avatar goes off the top or bottom
+  // wrap it around
+  if (avatar.getY() > height) {
+    avatar.setY(avatar.getY() - height);
+  } else if (avatar.getY() < 0) {
+    avatar.setY(avatar.getY() + height);
+  }
   // If the enemy goes off the left or right
   // wrap it around
   if (enemy.getX() > width) {
@@ -199,7 +205,7 @@ void draw() {
     avatar.setVelXY(0, 0);
   }
   // enemy stays on the floor and goes automatically from left to right
-      enemy.setFrameSequence(1, 1, 0.1);
+      enemy.setFrameSequence(1, 1, 0.5);
       // And set a positive velocity
       enemy.setVelXY(enemySpeed, 0);
     //Red Alert ends here.-----------------------------------Ok
