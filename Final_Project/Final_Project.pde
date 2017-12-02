@@ -22,8 +22,13 @@
 //
 
 // Global variables 
+// Show counter on screen
+Score score;
+PImage bgimg;
 PImage img;
 int counter = 0;
+boolean gameIsOver=false;   // control when game is over
+boolean winner=false;       // winner is detected by color
 //Red Alert ! -------------------- Sprite library stuff follows
 // Import the Sprites library (you need to install
 // it if you don't have it)
@@ -31,6 +36,10 @@ int counter = 0;
 import sprites.*;
 import sprites.maths.*;
 import sprites.utils.*;
+
+
+
+
 
 // Create a Sprite for our avatar
 
@@ -46,19 +55,22 @@ float avatarSpeed = 50;
 //Red Alert ends here.-----------------------------------Ok
 
 ArrayList<HeartSprite> heartSprites;
-int heartSpriteWidth =50;
+int heartSpriteWidth =350;
 
 void setup()
 {
   size(500, 500);
-  img = loadImage("background.png");
-
+  score = new Score(counter);
+  bgimg = loadImage("background.png");
+   img = loadImage("heart0.png");
+ image(img, 200,200,10,10);
   //Arraylist 
   // Create an empty ArrayList (will store HeartSprite objects)
   heartSprites = new ArrayList<HeartSprite>();
 
   // Start by adding one element
-  heartSprites.add(new HeartSprite(this, img, width/2, 0, heartSpriteWidth));
+ 
+  heartSprites.add(new HeartSprite(this, img, mouseX, mouseY, heartSpriteWidth));
   //Arraylist ends
   //Red Alert ! -------------------- Sprite library stuff follows
   // Create our Sprite by providing "this", the file
@@ -67,25 +79,25 @@ void setup()
   // z-depth of this sprite
   avatar = new Sprite(this, "avatar.png", 4, 4, 0);
   // Set the avatar's position on screen
-  avatar.setXY(width/2, height-100);
+  avatar.setXY(width/2, height-100); // on the floor of bedroom
   // Set the default (idle) frame sequence from the
   // sheet to animate
   avatar.setFrameSequence(1, 4);
   //Red Alert ends here.-----------------------------------Ok
-}
+
 
 //Add to the ArrayList by Clicking on mouse
-void mousePressed() {
+//void mousePressed() {
   // A new HeartSprite object is added to the ArrayList (by default to the end)
-  println("add another HeartSprite");
-  heartSprites.add(new HeartSprite(this,img, mouseX, mouseY, random (32, 72)));
+  for (int i=0; i<42; i++) 
+  heartSprites.add(new HeartSprite(this,img, random(width), random(height), heartSpriteWidth));
 }
 
 void draw() {
 
   // background(127);
-  image(img, width/2, height/2);
- 
+  image(bgimg, width/2, height/2);
+
   //ArrayList
   // With an array, we say HeartSprites.length, with an ArrayList, we say HeartSprites.size()
   // The length of an ArrayList is dynamic
@@ -96,26 +108,21 @@ void draw() {
   { 
     HeartSprite heartSprite = heartSprites.get(i);
     // An ArrayList doesn't know what it is storing so we have to cast the object coming out
-    println("Item: " +  " Sprite" + heartSprite);
-    println("Item: " +  " Sprite" + heartSprite.getPos  ());
+    //println("Item: " +  " Sprite" + heartSprite);
+    //println("Item: " +  " Sprite" + heartSprite.getPos  ());
     heartSprite.ascend();
     //heartSprite.display();
     //heartSprite.move();
     heartSprite.display();
-   
-    //if (heartSprite.finished()) {
-       //Items can be deleted with remove()
-      //heartSprites.remove(heartSprite);
-      //heartSprite.display();
-    //}
-    println("Item: " +  " Sprite has collided :" + heartSprite.bb_collision(avatar));
+//    println("Item: " +  " Sprite has collided :" + heartSprite.bb_collision(avatar));
     if(heartSprite.bb_collision(avatar)){
       counter++;
       println(counter);
+      score.display();
       heartSprites.remove(heartSprite);
-      println("Item: " +  " Sprite");
+  //    println("Item: " +  " Sprite");
       heartSprite.setDead(true);
-      heartSprite.display();
+     // heartSprite.display();
     }
   }  
 
