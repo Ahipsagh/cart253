@@ -67,7 +67,7 @@ void setup()
   // z-depth of this sprite
   avatar = new Sprite(this, "avatar.png", 4, 4, 0);
   // Set the avatar's position on screen
-  avatar.setXY(width/2, height/2);
+  avatar.setXY(width/2, height-100);
   // Set the default (idle) frame sequence from the
   // sheet to animate
   avatar.setFrameSequence(1, 4);
