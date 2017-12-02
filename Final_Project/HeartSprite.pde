@@ -19,6 +19,7 @@ class HeartSprite extends Sprite {
   float life = 255;
   PImage img;
   int range=500;
+  float xoff = random(-10, 20);
 
   HeartSprite(PApplet app, PImage image, float tempX, float tempY, float tempW) {
     super(app, "heart0.png", 1, 1, 0);
@@ -78,7 +79,17 @@ class HeartSprite extends Sprite {
 
     //stroke(0,life);
 //    imageMode(CENTER);
-    image(img, x, y, w, w);
+
+  //  image(img, x, y, w,w);
+     // each fish has a random noise factor subtracted from its random diameter
+    // and then it is displayed.  Notice the fishing line.
+    y += vy; // increases the velocity by 2
+    xoff = xoff + .03;
+    float n = noise(xoff) * 150 ;
+    //line(n, 2, n, 20);
+   // imageMode(CENTER);
+    image(img, x, y, w-n, w-n);
+    
   }
 
   //ArrayListnds

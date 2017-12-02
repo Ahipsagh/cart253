@@ -101,7 +101,7 @@ void setup()
   //void mousePressed() {
   // A new HeartSprite object is added to the ArrayList (by default to the end)
   for (int i=0; i<42; i++) 
-    heartSprites.add(new HeartSprite(this, img, random(width), random(height), heartSpriteWidth));
+    heartSprites.add(new HeartSprite(this, img, random(width), random(height), random(20,heartSpriteWidth)));
 }
 
 void draw() {
