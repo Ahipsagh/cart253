@@ -90,7 +90,7 @@ void setup()
   // create enemy sprite follows
   enemy = new Sprite(this, "fish0.png", 1, 1, 0);
   // Set the enemy's position on screen
-  enemy.setXY(width/2, height-100); // on the floor of bedroom
+  enemy.setXY(width, height-100); // on the floor of bedroom
   // Set the default (idle) frame sequence from the
   // sheet to animate
   enemy.setFrameSequence(1, 1);
@@ -198,30 +198,10 @@ void draw() {
     // And turn off velocity
     avatar.setVelXY(0, 0);
   }
-  // Handle input is a key is pressed
-  if (keyPressed) {
-
-    if (keyCode == LEFT) {
-      println("left");
-      // If they press left, set up the walking animation
-      // (Tragically we only have animation for walking to
-      // the right, so this avatar will have to moon walk.)
-      enemy.setFrameSequence(1, 1, 0.1);
-      // Set a negative velocity (so the avatar moves left)
-      enemy.setVelXY(-enemySpeed, 0);
-    } else if (keyCode == RIGHT) {
-      println("right");
-      // If they press right, set the walking animation frames
+  // enemy stays on the floor and goes automatically from left to right
       enemy.setFrameSequence(1, 1, 0.1);
       // And set a positive velocity
       enemy.setVelXY(enemySpeed, 0);
-    } else {
-      // If no key is pressed then return to the idel frame
-      enemy.setFrameSequence(1, 1, 0.5);
-      // And turn off velocity
-      enemy.setVelXY(0, 0);
-    }
-  }
     //Red Alert ends here.-----------------------------------Ok
   }
   /*
