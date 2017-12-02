@@ -23,7 +23,7 @@
 
 // Global variables 
 PImage img;
-PImage[] aHeart = new PImage[7];
+int counter = 0;
 //Red Alert ! -------------------- Sprite library stuff follows
 // Import the Sprites library (you need to install
 // it if you don't have it)
@@ -36,9 +36,6 @@ import sprites.utils.*;
 
 //Sprite heartSprite;
 Sprite avatar;
-ArrayList<Sprite> heartSprite = new ArrayList<Sprite>();
-
-
 
 // Create a StopWatch to keep track of time passing
 // (So we know how fast the animation should run.)
@@ -48,33 +45,20 @@ StopWatch timer = new StopWatch();
 float avatarSpeed = 50; 
 //Red Alert ends here.-----------------------------------Ok
 
-ArrayList<HeartSprite> HeartSprites;
-int HeartSpriteWidth = 100;
-
-
-Heart[] Heart= new Heart[14];
+ArrayList<HeartSprite> heartSprites;
+int heartSpriteWidth =50;
 
 void setup()
 {
   size(500, 500);
   img = loadImage("background.png");
 
-  for (int i= 0; i< aHeart.length; i++)
-  {
-    aHeart[i] = loadImage("heart"+0+".png");
-  }
-  for (int i= 0; i< Heart.length; i++)
-  {
-    // loading random Heart images into an image array
-    int index = int(random(0, aHeart.length));
-    Heart[i] = new Heart(aHeart[index], 100+i*100, 300, random (32, 72));
-  }
   //Arraylist 
   // Create an empty ArrayList (will store HeartSprite objects)
-  HeartSprites = new ArrayList<HeartSprite>();
+  heartSprites = new ArrayList<HeartSprite>();
 
   // Start by adding one element
-  HeartSprites.add(new HeartSprite(width/2, 0, HeartSpriteWidth));
+  heartSprites.add(new HeartSprite(this, img, width/2, 0, heartSpriteWidth));
   //Arraylist ends
   //Red Alert ! -------------------- Sprite library stuff follows
   // Create our Sprite by providing "this", the file
@@ -94,22 +78,14 @@ void setup()
 void mousePressed() {
   // A new HeartSprite object is added to the ArrayList (by default to the end)
   println("add another HeartSprite");
-  heartSprites.add(new HeartSprite(this,img, mouseX, mouseY, heartSpriteWidth));
+  heartSprites.add(new HeartSprite(this,img, mouseX, mouseY, random (32, 72)));
 }
 
 void draw() {
 
   // background(127);
   image(img, width/2, height/2);
-
-  //for (int i= 0; i< Heart.length; i++)
-  //{
-  //  Heart[i].ascend();
-  //  Heart[i].display();
-  //}
-  
-  
-  
+ 
   //ArrayList
   // With an array, we say HeartSprites.length, with an ArrayList, we say HeartSprites.size()
   // The length of an ArrayList is dynamic
