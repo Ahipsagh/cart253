@@ -94,39 +94,52 @@ void setup()
 void mousePressed() {
   // A new HeartSprite object is added to the ArrayList (by default to the end)
   println("add another HeartSprite");
-  HeartSprites.add(new HeartSprite(mouseX, mouseY, HeartSpriteWidth));
+  heartSprites.add(new HeartSprite(this,img, mouseX, mouseY, heartSpriteWidth));
 }
-//ArrayList ends
-for (int i = heartsSprite.size() - 1; i >= 0; i--) {
-  Sprite heartSprite = (Sprite)heartSprite.get(i);
-  if (avatar.bb_collision(heartSprite)) {
-    heartSprite.remove(i);
-  }
-}
+
 void draw() {
 
   // background(127);
   image(img, width/2, height/2);
 
-  for (int i= 0; i< Heart.length; i++)
-  {
-    Heart[i].ascend();
-    Heart[i].display();
-  }
+  //for (int i= 0; i< Heart.length; i++)
+  //{
+  //  Heart[i].ascend();
+  //  Heart[i].display();
+  //}
+  
+  
+  
   //ArrayList
   // With an array, we say HeartSprites.length, with an ArrayList, we say HeartSprites.size()
   // The length of an ArrayList is dynamic
   // Notice how we are looping through the ArrayList backwards
-  // This is because we are deleting elements from the list  
-  for (int i = HeartSprites.size()-1; i >= 0; i--) 
+  // This is because we are deleting elements from the list 
+  
+  for (int i = heartSprites.size()-1; i >0 ; i--) 
   { 
+    HeartSprite heartSprite = heartSprites.get(i);
     // An ArrayList doesn't know what it is storing so we have to cast the object coming out
-    HeartSprite HeartSprite = HeartSprites.get(i);
-    HeartSprite.move();
-    HeartSprite.display();
-    if (HeartSprite.finished()) {
-      // Items can be deleted with remove()
-      HeartSprites.remove(i);
+    println("Item: " +  " Sprite" + heartSprite);
+    println("Item: " +  " Sprite" + heartSprite.getPos  ());
+    heartSprite.ascend();
+    //heartSprite.display();
+    //heartSprite.move();
+    heartSprite.display();
+   
+    //if (heartSprite.finished()) {
+       //Items can be deleted with remove()
+      //heartSprites.remove(heartSprite);
+      //heartSprite.display();
+    //}
+    println("Item: " +  " Sprite has collided :" + heartSprite.bb_collision(avatar));
+    if(heartSprite.bb_collision(avatar)){
+      counter++;
+      println(counter);
+      heartSprites.remove(heartSprite);
+      println("Item: " +  " Sprite");
+      heartSprite.setDead(true);
+      heartSprite.display();
     }
   }  
 
@@ -148,8 +161,10 @@ void draw() {
     avatar.setX(avatar.getX() + width);
   }
 
+  
   // Handle input is a key is pressed
   if (keyPressed) {
+    
     if (keyCode == LEFT) {
       println("left");
       // If they press left, set up the walking animation
@@ -183,6 +198,7 @@ void draw() {
     // And turn off velocity
     avatar.setVelXY(0, 0);
   }
+  
   //Red Alert ends here.-----------------------------------Ok
 }
 /*
