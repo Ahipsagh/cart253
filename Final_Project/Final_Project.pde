@@ -63,7 +63,7 @@ float enemySpeed = 10;
 
 void setup()
 {
-  size(500, 500);
+  size(960, 540);
   score = new Score(counter);
   bgimg = loadImage("background.png");
   img = loadImage("heart0.png");
@@ -107,7 +107,7 @@ void setup()
 void draw() {
 
   // background(127);
-  image(bgimg, width/2, height/2);
+  image(bgimg, width, height);
 
   //ArrayList
   // With an array, we say HeartSprites.length, with an ArrayList, we say HeartSprites.size()
