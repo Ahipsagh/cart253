@@ -61,16 +61,6 @@ class HeartSprite extends Sprite {
     }
   }
 
-  boolean finished() {
-    // HeartSprites fade out
-    life--;
-    if (life < 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   void display() {
      y += vy; // increases the velocity by 2
     // Display the circle

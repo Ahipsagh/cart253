@@ -20,11 +20,15 @@ class Score {
   // Updates position based on velocity and constraints the paddle to the window
 
   void update() {
+    
+    println("score=" + score + counter);
     // Update scores
-    if (score == 42) {
-      winner=true;
+    if (counter == 5) {
+      winner="you";
       gameIsOver=true;
+      
       println("Game Over");
+      
     }
   }
   //------------------------------------------------------------------------------------//
@@ -34,7 +38,7 @@ class Score {
   // Display the scores
   //
   void display() {
-
+ println("score" + gameIsOver);
     PFont courierFont = createFont("Courier", 64); // Create a Courier font
     textFont(courierFont); // Use the new font
     textSize(45);
@@ -44,10 +48,24 @@ class Score {
 
   void gameOver()
   {
+    if ( (winner=="you") && (gameIsOver==true) )
+    {
     PFont courierFont = createFont("Courier", 64); // Create a Courier font
     textFont(courierFont); // Use the new font
     fill(0, 255, 0);
     textSize(92);
     text("Game Over", 80, 350); // Text on screen Game Over
+    text("NO More monster ", 80, 250); // Text on screen Game Over
+    }
+    else if ( (winner=="monster") && (gameIsOver==true) )
+    {
+          PFont courierFont = createFont("Courier", 64); // Create a Courier font
+    textFont(courierFont); // Use the new font
+    fill(0, 255, 0);
+    textSize(92);
+    text("Game Over", 80, 350); // Text on screen Game Over
+    text("the monster got you ", 80, 250); // Text on screen Game Over
+    }
+   
   }
 }

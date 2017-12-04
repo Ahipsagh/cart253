@@ -49,7 +49,7 @@ PImage bgimg;
 PImage img;
 int counter = 0;
 boolean gameIsOver=false;   // control when game is over
-boolean winner=false;       // winner is detected by color
+String winner=null;       // winner is detected by color
 
 
 
@@ -81,18 +81,18 @@ StopWatch timer = new StopWatch();
 
 // How fast the avatar mores (pixels per second)
 float avatarSpeed = 50; 
-float enemySpeed = random(10,20); 
+float enemySpeed = random(10, 20); 
 //Red Alert ends here.-----------------------------------Ok
 
 
 void setup()
 {
   size(960, 540);
-  
+
   minim = new Minim(this);
-// We use minim.getLineIn() to get access to the microphone data
-// mic = minim.getLineIn();
-//  stereoSound = minim.loadFile("sounds/song.wav");
+  // We use minim.getLineIn() to get access to the microphone data
+  // mic = minim.getLineIn();
+  //  stereoSound = minim.loadFile("sounds/song.wav");
   song = new SoundFile(this, "sounds/background.mp3");
   heartCollected = new SoundFile(this, "sounds/heart_collected.mp3");
   monster = new SoundFile(this, "sounds/monster_appears.mp3");
@@ -101,7 +101,7 @@ void setup()
   // the song loops until the mouse is clicked.
   song.loop();
 
-  
+
   score = new Score(counter);
   bgimg = loadImage("background.png");
   img = loadImage("heart0.png");
@@ -139,21 +139,21 @@ void setup()
   //void mousePressed() {
   // A new HeartSprite object is added to the ArrayList (by default to the end)
   for (int i=0; i<42; i++) 
-    heartSprites.add(new HeartSprite(this, img, random(width), random(height), random(20,heartSpriteWidth)));
+    heartSprites.add(new HeartSprite(this, img, random(width), random(height), random(20, heartSpriteWidth)));
 }
 
 void draw() {
-  
+
   // background(127);
   image(bgimg, width, height);
- if (!gameIsOver)
-  {
+
   //ArrayList
   // With an array, we say HeartSprites.length, with an ArrayList, we say HeartSprites.size()
   // The length of an ArrayList is dynamic
   // Notice how we are looping through the ArrayList backwards
   // This is because we are deleting elements from the list 
   score.display();
+  println(gameIsOver);
   for (int i = heartSprites.size()-1; i >0; i--) 
   { 
     HeartSprite heartSprite = heartSprites.get(i);
@@ -206,15 +206,15 @@ void draw() {
   // wrap it around
   if (enemy.getX() > width) {
     enemy.setX(enemy.getX() - width);
-  } else if (enemy.getX() < 0) {
+  } else if (enemy.getX() +100 < 0) {
     enemy.setX(enemy.getX() + width);
   }
   // Handle input is a key is pressed
   if (keyPressed) {
 
     if (keyCode == LEFT) {
-    
-     walk.play(0.085);
+
+      //walk.play(0.085);
       // If they press left, set up the walking animation
       // (Tragically we only have animation for walking to
       // the right, so this avatar will have to moon walk.)
@@ -222,22 +222,22 @@ void draw() {
       // Set a negative velocity (so the avatar moves left)
       avatar.setVelXY(-avatarSpeed, 0);
     } else if (keyCode == RIGHT) {
-     
-       walk.play(0.085);
+
+      walk.play(0.085);
       // If they press right, set the walking animation frames
       avatar.setFrameSequence(12, 15, 0.1);
       // And set a positive velocity
       avatar.setVelXY(avatarSpeed, 0);
     } else if (keyCode == UP) {
-     
-       walk.play(0.085);
+
+      walk.play(0.085);
       // If they press up, set the walking animation frames
       avatar.setFrameSequence(8, 11, 0.1);
       // And set a positive velocity
       avatar.setVelXY(0, -avatarSpeed);
     } else if (keyCode == DOWN) {
-     
-       walk.play(0.085);
+
+      walk.play(0.085);
       // If they press down, set the walking animation frames
       avatar.setFrameSequence(0, 3, 0.1);
       // And set a positive velocity
@@ -250,19 +250,19 @@ void draw() {
     avatar.setVelXY(0, 0);
   }
   // enemy stays on the floor and goes automatically from left to right
-   
-      enemy.setFrameSequence(1, 1, 0.5);
-      // And set a positive velocity
-      enemy.setVelXY(enemySpeed, 0);
-    //Red Alert ends here.-----------------------------------Ok
+
+  enemy.setFrameSequence(1, 1, 0.5);
+  // And set a positive velocity
+  enemy.setVelXY(enemySpeed, 0);
+  //Red Alert ends here.-----------------------------------Ok
+
+
+  if (gameIsOver==true)
+  {
+    score.gameOver();
   }
- 
-else if (gameIsOver)
-{
-score.gameOver();
 }
-}
-  void mouseClicked() {
+void mouseClicked() {
   if (songPlays) 
   {
     song.stop(); // Make it stop! Make it stop!
@@ -275,44 +275,44 @@ score.gameOver();
   }
 }
 
-  /*
+/*
 //------------------------------------------------------------------------------------//
-   
-   Create a prototype of a key part of your final project. - REDO
-   
-   Brief
-   
-   Because it's time to be focused entirely on the final project, this week's exercise is 
-   to make sure you build a prototype of some part of that project. The best idea would be 
-   to create a prototype that has the absolutely most basic features of your project (such 
-   as moving an avatar and collecting items, say). Placeholder art (including just shapes) 
-   is completely fine. The key is to get the basic code for your project working and 
-   experienceable.
-   
-   If you have already created such a prototype (which would have been a good idea anyway), 
-   feel free to tidy it up, comment it well, make sure your variable names are sensible, and 
-   then submit it. Make a note in your code if you have fewer than the minimum commits 
-   because you had already written it earlier.
-   
-   Exercise Steps
-   
-   Because there isn't a set of steps to follow you should just make sure to follow the 
-   basic process of using Git to track your work:
-   
-   0. Version 2.0 Begins - Done
-   Come up with an idea for part of your prototype
-   
-   1.
-   Write some code that achieves that and comment it clearly
-   
-   2.
-   Commit this code with a message that describes what you added
-   
-   3.
-   Push your changes at regular intervals
-   
-   4.
-   Repeat
-   // Requirements as per Pippin Barr----------------------------------------------------//
-   
-   */
+ 
+ Create a prototype of a key part of your final project. - REDO
+ 
+ Brief
+ 
+ Because it's time to be focused entirely on the final project, this week's exercise is 
+ to make sure you build a prototype of some part of that project. The best idea would be 
+ to create a prototype that has the absolutely most basic features of your project (such 
+ as moving an avatar and collecting items, say). Placeholder art (including just shapes) 
+ is completely fine. The key is to get the basic code for your project working and 
+ experienceable.
+ 
+ If you have already created such a prototype (which would have been a good idea anyway), 
+ feel free to tidy it up, comment it well, make sure your variable names are sensible, and 
+ then submit it. Make a note in your code if you have fewer than the minimum commits 
+ because you had already written it earlier.
+ 
+ Exercise Steps
+ 
+ Because there isn't a set of steps to follow you should just make sure to follow the 
+ basic process of using Git to track your work:
+ 
+ 0. Version 2.0 Begins - Done
+ Come up with an idea for part of your prototype
+ 
+ 1.
+ Write some code that achieves that and comment it clearly
+ 
+ 2.
+ Commit this code with a message that describes what you added
+ 
+ 3.
+ Push your changes at regular intervals
+ 
+ 4.
+ Repeat
+ // Requirements as per Pippin Barr----------------------------------------------------//
+ 
+ */
