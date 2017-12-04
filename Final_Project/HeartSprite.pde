@@ -11,11 +11,11 @@ class HeartSprite extends Sprite {
   float x;
   float y;
   float vx;
-  float vy = random(-1,2);
+  float vy = random(-1, 2);
   float speed;
   float gravity;
   float w;
-  float diameter = random(20,60);
+  float diameter = random(20, 60);
   float life = 255;
   PImage img;
   int range=500;
@@ -29,23 +29,19 @@ class HeartSprite extends Sprite {
     img = image;
     this.setXY(400, 350);
     this.setFrameSequence(1, 1);
-    
   }
 
 
   void ascend()
     // Heart go to top of screen and move randomly left and right 
-  //{
-     {
-    if (y > range || y < 0){
+
+  {
+    if (y > range || y < 0) {
       vy = -vy; // if less than top of canvas or more than bottom of canvas it reverses the direction randomly
-     x = x + random(-2, 2);
+      x = x + random(-2, 2);
     }
-     }
-  // }
-  //    y =(y < 0 && y >= height) ? y + random(-2, 0) : y + random(0, 2);
-  //    x = x < 0 && x >= width? x + random(-2, 0) : x + random(0, 2);
-  //}
+  }
+
 
   void move() {
     // Add gravity to speed
@@ -62,24 +58,18 @@ class HeartSprite extends Sprite {
   }
 
   void display() {
-     y += vy; // increases the velocity by 2
+    y += vy; // increases the velocity by 2
     // Display the circle
     fill(0, life);
-  this.setXY((int)x, (int)y);
-
-    //stroke(0,life);
-//    imageMode(CENTER);
-
-  //  image(img, x, y, w,w);
-     // each fish has a random noise factor subtracted from its random diameter
-    // and then it is displayed.  Notice the fishing line.
+    this.setXY((int)x, (int)y);
+    // each heart has a random noise factor subtracted from its random diameter
+    // and then it is displayed.  
     y += vy; // increases the velocity by 2
     xoff = xoff + .03;
     float n = noise(xoff) * 150 ;
     //line(n, 2, n, 20);
-   // imageMode(CENTER);
+    // imageMode(CENTER);
     image(img, x, y, w-n, w-n);
-    
   }
 
   //ArrayListnds

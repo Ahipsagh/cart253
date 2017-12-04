@@ -100,7 +100,7 @@ void setup()
   score = new Score(counter);
   bgimg = loadImage("background.png");
   img = loadImage("heart0.png");
-  image(img, 200, 200, 10, 10);
+  //image(img, 200, 200, 10, 10);
   //Arraylist 
   // Create an empty ArrayList (will store HeartSprite objects)
   heartSprites = new ArrayList<HeartSprite>();
@@ -141,42 +141,47 @@ void draw() {
 
   // background(127);
   image(bgimg, width, height);
-  println(timer.getElapsedTime() + " " + timer.getRunTime());
-  if (timer.getRunTime() >= 42.0)
+
+//The monster works on a timer.  When the time is up and the avatar has not collected all the hearts
+// monster wins.
+if ( (gameIsOver ==false) &&
+     (timer.getRunTime() >= 42.0) )
   {
-    println("monster wins----------------------------------------------");
     winner="monster";
     gameIsOver=true;
   }
+// show the gameOver screen
+  if (gameIsOver==true)
+  {
+    score.gameOver();
+  }
+// set up the Array list of Hearts (Sprite)  
   //ArrayList
   // With an array, we say HeartSprites.length, with an ArrayList, we say HeartSprites.size()
   // The length of an ArrayList is dynamic
   // Notice how we are looping through the ArrayList backwards
   // This is because we are deleting elements from the list 
   score.display();
-  println(gameIsOver);
+
   for (int i = heartSprites.size()-1; i >0; i--) 
   { 
     HeartSprite heartSprite = heartSprites.get(i);
     // An ArrayList doesn't know what it is storing so we have to cast the object coming out
-    //println("Item: " +  " Sprite" + heartSprite);
-    //println("Item: " +  " Sprite" + heartSprite.getPos  ());
     heartSprite.ascend();
-    //heartSprite.display();
-    //heartSprite.move();
     heartSprite.display();
-    //    println("Item: " +  " Sprite has collided :" + heartSprite.bb_collision(avatar));
+
+
+//  Here the heart (Sprite) are collected and removed from the arraylsit with the method
+// heartSprite.bb_collision(avatar)
     if (heartSprite.bb_collision(avatar)) {
       counter++;
       heartCollected.amp(0.5);
       heartCollected.play();
-      println(counter);
       score.update();
       score.display();
       heartSprites.remove(heartSprite);
-      //    println("Item: " +  " Sprite");
-      heartSprite.setDead(true);
-      // heartSprite.display();
+      heartSprite.setDead(true); // is it really dead ?
+      heartSprite.display();
     }
   }  
 
@@ -255,19 +260,15 @@ void draw() {
   //Red Alert ends here.-----------------------------------Ok
 
 
-  if (gameIsOver==true)
-  {
-    score.gameOver();
-  }
 }
 void mouseClicked() {
   if (songPlays) 
   {
-    song.stop(); // Make it stop! Make it stop!
+    song.stop(); // You can click background music to stop 
     songPlays=false;
   } else
   {
-    song.amp(0.5);
+    song.amp(0.5);// You can click background music to start again at half the volume 
     song.loop();
     songPlays=true;
   }
