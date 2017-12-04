@@ -31,6 +31,10 @@ import sprites.utils.*;
 Minim minim;
 AudioPlayer stereoSound;
 SoundFile song;
+SoundFile heartCollected;
+SoundFile monster;
+SoundFile monsterHum;
+SoundFile walk;
 //AudioInput mic; // The class that lets us get at the microphone
 //float volume = map(mouseX, 0, width, 0, 1);
 boolean songPlays=true; // used to toggle play and stop
@@ -69,7 +73,7 @@ StopWatch timer = new StopWatch();
 
 // How fast the avatar mores (pixels per second)
 float avatarSpeed = 50; 
-float enemySpeed = 10; 
+float enemySpeed = random(10,20); 
 //Red Alert ends here.-----------------------------------Ok
 
 
@@ -80,11 +84,15 @@ void setup()
   minim = new Minim(this);
 // We use minim.getLineIn() to get access to the microphone data
 // mic = minim.getLineIn();
-  stereoSound = minim.loadFile("sounds/song.wav");
-  song = new SoundFile(this, "sounds/song.wav");
+//  stereoSound = minim.loadFile("sounds/song.wav");
+  song = new SoundFile(this, "sounds/background.mp3");
+  heartCollected = new SoundFile(this, "sounds/heart_collected.mp3");
+  monster = new SoundFile(this, "sounds/monster_appears.mp3");
+  monsterHum = new SoundFile(this, "sounds/monsterHumming.mp3");
+  walk = new SoundFile(this, "sounds/kick.wav");
   // the song loops until the mouse is clicked.
   song.loop();
-  stereoSound.loop();
+
   
   score = new Score(counter);
   bgimg = loadImage("background.png");
@@ -150,6 +158,7 @@ void draw() {
     //    println("Item: " +  " Sprite has collided :" + heartSprite.bb_collision(avatar));
     if (heartSprite.bb_collision(avatar)) {
       counter++;
+      heartCollected.play();
       println(counter);
       score.display();
       heartSprites.remove(heartSprite);
@@ -195,6 +204,7 @@ void draw() {
 
     if (keyCode == LEFT) {
       println("left");
+     walk.play(0.085);
       // If they press left, set up the walking animation
       // (Tragically we only have animation for walking to
       // the right, so this avatar will have to moon walk.)
@@ -203,18 +213,21 @@ void draw() {
       avatar.setVelXY(-avatarSpeed, 0);
     } else if (keyCode == RIGHT) {
       println("right");
+       walk.play(0.085);
       // If they press right, set the walking animation frames
       avatar.setFrameSequence(12, 15, 0.1);
       // And set a positive velocity
       avatar.setVelXY(avatarSpeed, 0);
     } else if (keyCode == UP) {
       println("up");
+       walk.play(0.085);
       // If they press up, set the walking animation frames
       avatar.setFrameSequence(8, 11, 0.1);
       // And set a positive velocity
       avatar.setVelXY(0, -avatarSpeed);
     } else if (keyCode == DOWN) {
       println("down");
+       walk.play(0.085);
       // If they press down, set the walking animation frames
       avatar.setFrameSequence(0, 3, 0.1);
       // And set a positive velocity
@@ -227,6 +240,7 @@ void draw() {
     avatar.setVelXY(0, 0);
   }
   // enemy stays on the floor and goes automatically from left to right
+   
       enemy.setFrameSequence(1, 1, 0.5);
       // And set a positive velocity
       enemy.setVelXY(enemySpeed, 0);
@@ -240,6 +254,7 @@ void draw() {
     songPlays=false;
   } else
   {
+    song.amp(0.03);
     song.loop();
     songPlays=true;
   }
