@@ -24,7 +24,7 @@ class Score {
     if (score == 42) {
       winner=true;
       gameIsOver=true;
-      //      println("Game Over");
+      println("Game Over");
     }
   }
   //------------------------------------------------------------------------------------//
@@ -34,14 +34,20 @@ class Score {
   // Display the scores
   //
   void display() {
-    //fill(0,255,0);
-    //textSize(92);
-    //text("Game Over", 80, 350); // Text on screen Game Over
 
     PFont courierFont = createFont("Courier", 64); // Create a Courier font
     textFont(courierFont); // Use the new font
     textSize(45);
     fill(255, 255, 255);
     text(counter, 370, 300); // show counter on screen
+  }
+
+  void gameOver()
+  {
+    PFont courierFont = createFont("Courier", 64); // Create a Courier font
+    textFont(courierFont); // Use the new font
+    fill(0, 255, 0);
+    textSize(92);
+    text("Game Over", 80, 350); // Text on screen Game Over
   }
 }

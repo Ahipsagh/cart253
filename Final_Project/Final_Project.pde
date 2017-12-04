@@ -42,11 +42,19 @@ boolean songPlays=true; // used to toggle play and stop
 // Global variables 
 // Show counter on screen
 Score score;
+
+
+
 PImage bgimg;
 PImage img;
 int counter = 0;
 boolean gameIsOver=false;   // control when game is over
 boolean winner=false;       // winner is detected by color
+
+
+
+
+
 //Red Alert ! -------------------- Sprite library stuff follows
 // Import the Sprites library (you need to install
 // it if you don't have it)
@@ -138,7 +146,8 @@ void draw() {
   
   // background(127);
   image(bgimg, width, height);
-
+ if (!gameIsOver)
+  {
   //ArrayList
   // With an array, we say HeartSprites.length, with an ArrayList, we say HeartSprites.size()
   // The length of an ArrayList is dynamic
@@ -160,6 +169,7 @@ void draw() {
       counter++;
       heartCollected.play();
       println(counter);
+      score.update();
       score.display();
       heartSprites.remove(heartSprite);
       //    println("Item: " +  " Sprite");
@@ -203,7 +213,7 @@ void draw() {
   if (keyPressed) {
 
     if (keyCode == LEFT) {
-      println("left");
+    
      walk.play(0.085);
       // If they press left, set up the walking animation
       // (Tragically we only have animation for walking to
@@ -212,21 +222,21 @@ void draw() {
       // Set a negative velocity (so the avatar moves left)
       avatar.setVelXY(-avatarSpeed, 0);
     } else if (keyCode == RIGHT) {
-      println("right");
+     
        walk.play(0.085);
       // If they press right, set the walking animation frames
       avatar.setFrameSequence(12, 15, 0.1);
       // And set a positive velocity
       avatar.setVelXY(avatarSpeed, 0);
     } else if (keyCode == UP) {
-      println("up");
+     
        walk.play(0.085);
       // If they press up, set the walking animation frames
       avatar.setFrameSequence(8, 11, 0.1);
       // And set a positive velocity
       avatar.setVelXY(0, -avatarSpeed);
     } else if (keyCode == DOWN) {
-      println("down");
+     
        walk.play(0.085);
       // If they press down, set the walking animation frames
       avatar.setFrameSequence(0, 3, 0.1);
@@ -246,7 +256,12 @@ void draw() {
       enemy.setVelXY(enemySpeed, 0);
     //Red Alert ends here.-----------------------------------Ok
   }
-  
+ 
+else if (gameIsOver)
+{
+score.gameOver();
+}
+}
   void mouseClicked() {
   if (songPlays) 
   {
@@ -254,7 +269,7 @@ void draw() {
     songPlays=false;
   } else
   {
-    song.amp(0.03);
+    song.amp(0.5);
     song.loop();
     songPlays=true;
   }
