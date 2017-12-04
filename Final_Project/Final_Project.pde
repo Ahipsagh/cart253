@@ -20,6 +20,20 @@
 // Environment
 //------------------------------------------------------------------------------------//
 //
+// importing the libraries.
+import ddf.minim.*;
+import processing.sound.*;
+
+import sprites.*;
+import sprites.maths.*;
+import sprites.utils.*;
+
+Minim minim;
+AudioPlayer stereoSound;
+SoundFile song;
+//AudioInput mic; // The class that lets us get at the microphone
+//float volume = map(mouseX, 0, width, 0, 1);
+boolean songPlays=true; // used to toggle play and stop
 
 // Global variables 
 // Show counter on screen
@@ -33,9 +47,7 @@ boolean winner=false;       // winner is detected by color
 // Import the Sprites library (you need to install
 // it if you don't have it)
 
-import sprites.*;
-import sprites.maths.*;
-import sprites.utils.*;
+
 
 
 
@@ -64,6 +76,16 @@ float enemySpeed = 10;
 void setup()
 {
   size(960, 540);
+  
+  minim = new Minim(this);
+// We use minim.getLineIn() to get access to the microphone data
+// mic = minim.getLineIn();
+  stereoSound = minim.loadFile("sounds/song.wav");
+  song = new SoundFile(this, "sounds/song.wav");
+  // the song loops until the mouse is clicked.
+  song.loop();
+  stereoSound.loop();
+  
   score = new Score(counter);
   bgimg = loadImage("background.png");
   img = loadImage("heart0.png");
@@ -105,7 +127,7 @@ void setup()
 }
 
 void draw() {
-
+  
   // background(127);
   image(bgimg, width, height);
 
@@ -210,6 +232,19 @@ void draw() {
       enemy.setVelXY(enemySpeed, 0);
     //Red Alert ends here.-----------------------------------Ok
   }
+  
+  void mouseClicked() {
+  if (songPlays) 
+  {
+    song.stop(); // Make it stop! Make it stop!
+    songPlays=false;
+  } else
+  {
+    song.loop();
+    songPlays=true;
+  }
+}
+
   /*
 //------------------------------------------------------------------------------------//
    
