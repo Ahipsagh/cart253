@@ -25,7 +25,7 @@ class HeartSprite extends Sprite {
     super(app, "heart0.png", 1, 1, 0);
     x= tempX;
     y= tempY;
-    diameter = tempW;
+    diameter = random (10,tempW);
     img = image;
     this.setXY(400, 350);
     this.setFrameSequence(1, 1);
@@ -67,14 +67,11 @@ class HeartSprite extends Sprite {
     y += vy; // increases the velocity by 2
     xoff = xoff + .03;
     float n = noise(xoff) * 150 ;
-    //line(n, 2, n, 20);
-    // imageMode(CENTER);
     image(img, x, y, w-n, w-n);
   }
 
-  //ArrayListnds
+  //ArrayList collision avatar and heart using method from Sprite Library
   boolean objectCollision(Sprite sprite) {
-    println( "Did I collide: " + (this.bb_collision(sprite)));
     return this.cc_collision(sprite);
   }
 }

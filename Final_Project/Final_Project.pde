@@ -69,22 +69,22 @@ Sprite enemy;
 
 //Sprite heartSprite;
 ArrayList<HeartSprite> heartSprites;
-int heartSpriteWidth =(int) random(20, 40);
+int heartSpriteWidth =200;
 
 // Create a StopWatch to keep track of time passing
 // (So we know how fast the animation should run.)
 StopWatch timer = new StopWatch();
 
 // How fast the avatar mores (pixels per second)
-float avatarSpeed = 50; 
+float avatarSpeed = 200; 
 float enemySpeed = 70; 
 //Red Alert ends here.-----------------------------------Ok
 
 
 void setup()
 {
-  size(960, 540);
-
+//  size(1920, 1080);
+size(960, 540);
   minim = new Minim(this);
   // We use minim.getLineIn() to get access to the microphone data
   // mic = minim.getLineIn();
@@ -100,7 +100,7 @@ void setup()
   score = new Score(counter);
   bgimg = loadImage("background.png");
   img = loadImage("heart0.png");
-  //image(img, 200, 200, 10, 10);
+  
   //Arraylist 
   // Create an empty ArrayList (will store HeartSprite objects)
   heartSprites = new ArrayList<HeartSprite>();
@@ -116,14 +116,16 @@ void setup()
   // z-depth of this sprite
   avatar = new Sprite(this, "avatar.png", 4, 4, 0);
   // Set the avatar's position on screen
-  avatar.setXY(width/2, height-100); // on the floor of bedroom
+  avatar.setXY(width/2, height-300); // on the floor of bedroom
   // Set the default (idle) frame sequence from the
   // sheet to animate
   avatar.setFrameSequence(1, 4);
+  
+  
   // create enemy sprite follows
   enemy = new Sprite(this, "fish0.png", 1, 1, 0);
   // Set the enemy's position on screen
-  enemy.setXY(width, height-100); // on the floor of bedroom
+  enemy.setXY(width, height-300); // on the floor of bedroom
   // Set the default (idle) frame sequence from the
   // sheet to animate
   enemy.setFrameSequence(1, 1);
@@ -134,27 +136,18 @@ void setup()
   //void mousePressed() {
   // A new HeartSprite object is added to the ArrayList (by default to the end)
   for (int i=0; i<42; i++) 
-    heartSprites.add(new HeartSprite(this, img, random(width), random(height), random(20, heartSpriteWidth)));
+    heartSprites.add(new HeartSprite(this, img, random(width), random(height), heartSpriteWidth));
 }
 
 void draw() {
 
-  // background(127);
-  image(bgimg, width, height);
 
-//The monster works on a timer.  When the time is up and the avatar has not collected all the hearts
-// monster wins.
-if ( (gameIsOver ==false) &&
-     (timer.getRunTime() >= 42.0) )
-  {
-    winner="monster";
-    gameIsOver=true;
-  }
-// show the gameOver screen
-  if (gameIsOver==true)
-  {
-    score.gameOver();
-  }
+//while (gameIsOver==false)
+//{  
+
+  // background(127);
+  image(bgimg, width/2, height/2);
+  
 // set up the Array list of Hearts (Sprite)  
   //ArrayList
   // With an array, we say HeartSprites.length, with an ArrayList, we say HeartSprites.size()
@@ -213,7 +206,7 @@ if ( (gameIsOver ==false) &&
   // wrap it around
   if (enemy.getX() > width) {
     enemy.setX(enemy.getX() - width);
-  } else if (enemy.getX() +100 < 0) {
+  } else if (enemy.getX() < 0) {
     enemy.setX(enemy.getX() + width);
   }
   // Handle input is a key is pressed
@@ -260,7 +253,22 @@ if ( (gameIsOver ==false) &&
   //Red Alert ends here.-----------------------------------Ok
 
 
+
+//The monster works on a timer.  When the time is up and the avatar has not collected all the hearts
+// monster wins.
+if ( (gameIsOver ==false) &&
+     (timer.getRunTime() >= 42.0) )
+  {
+    winner="monster";
+    gameIsOver=true;
+  }
+// show the gameOver screen
+  if (gameIsOver==true)
+  {
+    score.gameOver();
+  }
 }
+
 void mouseClicked() {
   if (songPlays) 
   {
