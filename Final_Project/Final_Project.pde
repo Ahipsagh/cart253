@@ -285,41 +285,60 @@ void mouseClicked() {
 /*
 //------------------------------------------------------------------------------------//
  
- Create a prototype of a key part of your final project. - REDO
- 
- Brief
- 
- Because it's time to be focused entirely on the final project, this week's exercise is 
- to make sure you build a prototype of some part of that project. The best idea would be 
- to create a prototype that has the absolutely most basic features of your project (such 
- as moving an avatar and collecting items, say). Placeholder art (including just shapes) 
- is completely fine. The key is to get the basic code for your project working and 
- experienceable.
- 
- If you have already created such a prototype (which would have been a good idea anyway), 
- feel free to tidy it up, comment it well, make sure your variable names are sensible, and 
- then submit it. Make a note in your code if you have fewer than the minimum commits 
- because you had already written it earlier.
- 
- Exercise Steps
- 
- Because there isn't a set of steps to follow you should just make sure to follow the 
- basic process of using Git to track your work:
- 
- 0. Version 2.0 Begins - Done
- Come up with an idea for part of your prototype
- 
- 1.
- Write some code that achieves that and comment it clearly
- 
- 2.
- Commit this code with a message that describes what you added
- 
- 3.
- Push your changes at regular intervals
- 
- 4.
- Repeat
- // Requirements as per Pippin Barr----------------------------------------------------//
+The submitted project is worth 40% of your final grade. You will be graded on the following 
+criteria for your work:
+
+Implementation (50%)
+--------------------
+
+0. Free of errors in the console
+-ERROR: /node/free: Node 83 not found ; this is due to sound.  Of course it did not work at 
+all on Windows Desktop.
+
+1. Your work should run and be without glitches and bugs
+
+2. Ambitious use of coding techniques taught during the class
+
+3. Bonus points available for using material not taught during the class
+- arrayList, extend object, had to add some fancy stuff and therefore called for some tech support.
+
+4. Level of complexity of implementation will be taken into account (but it's more important that 
+it works than that it is complicated!)
+
+
+Creativity (20%)
+----------------
+
+5. Original, personal, and creative work
+
+6. Focus especially on how your are using programming specifically as part of your creative process
+
+7. The artist's statement will help in understanding why your work is interesting and creative
+
+
+Style and structure (30%)
+-------------------------
+
+8. Correct submission of work
+
+9. Correct indenting and use of white space to make code readable
+
+10.Sufficient use of commenting to explain the code
+
+11.Comments clearly signpost and give credit for any code you have taken from elsewhere
+
+12.Comments clearly explain the added code
+
+13.Follows naming conventions established in class (e.g. camelCase)
+
+14.Sensible and clear naming of variables and functions
+
+15.Sensible and clear use of object-oriented programming
+
+16.Sensible and clear commit messages on GitHub
+
+17.Sensible use of commits to update the project incrementally with added functionality each time
+
+// Requirements as per Pippin Barr----------------------------------------------------//
  
  */
