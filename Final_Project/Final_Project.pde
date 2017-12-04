@@ -29,12 +29,12 @@ import sprites.maths.*;
 import sprites.utils.*;
 
 Minim minim;
-AudioPlayer stereoSound;
+
 SoundFile song;
 SoundFile heartCollected;
-SoundFile monster;
-SoundFile monsterHum;
-SoundFile walk;
+SoundFile win;
+SoundFile lose;
+
 //AudioInput mic; // The class that lets us get at the microphone
 //float volume = map(mouseX, 0, width, 0, 1);
 boolean songPlays=true; // used to toggle play and stop
@@ -50,10 +50,6 @@ PImage img;
 int counter = 0;
 boolean gameIsOver=false;   // control when game is over
 String winner=null;       // winner is detected by color
-
-
-
-
 
 //Red Alert ! -------------------- Sprite library stuff follows
 // Import the Sprites library (you need to install
@@ -73,7 +69,7 @@ Sprite enemy;
 
 //Sprite heartSprite;
 ArrayList<HeartSprite> heartSprites;
-int heartSpriteWidth =350;
+int heartSpriteWidth =(int) random(20, 40);
 
 // Create a StopWatch to keep track of time passing
 // (So we know how fast the animation should run.)
@@ -81,7 +77,7 @@ StopWatch timer = new StopWatch();
 
 // How fast the avatar mores (pixels per second)
 float avatarSpeed = 50; 
-float enemySpeed = random(10, 20); 
+float enemySpeed = 70; 
 //Red Alert ends here.-----------------------------------Ok
 
 
@@ -95,9 +91,8 @@ void setup()
   //  stereoSound = minim.loadFile("sounds/song.wav");
   song = new SoundFile(this, "sounds/background.mp3");
   heartCollected = new SoundFile(this, "sounds/heart_collected.mp3");
-  monster = new SoundFile(this, "sounds/monster_appears.mp3");
-  monsterHum = new SoundFile(this, "sounds/monsterHumming.mp3");
-  walk = new SoundFile(this, "sounds/kick.wav");
+  win = new SoundFile(this, "sounds/win.mp3");
+  lose = new SoundFile(this, "sounds/lose.mp3");
   // the song loops until the mouse is clicked.
   song.loop();
 
@@ -146,7 +141,13 @@ void draw() {
 
   // background(127);
   image(bgimg, width, height);
-
+  println(timer.getElapsedTime() + " " + timer.getRunTime());
+  if (timer.getRunTime() >= 42.0)
+  {
+    println("monster wins----------------------------------------------");
+    winner="monster";
+    gameIsOver=true;
+  }
   //ArrayList
   // With an array, we say HeartSprites.length, with an ArrayList, we say HeartSprites.size()
   // The length of an ArrayList is dynamic
@@ -167,6 +168,7 @@ void draw() {
     //    println("Item: " +  " Sprite has collided :" + heartSprite.bb_collision(avatar));
     if (heartSprite.bb_collision(avatar)) {
       counter++;
+      heartCollected.amp(0.5);
       heartCollected.play();
       println(counter);
       score.update();
@@ -214,7 +216,6 @@ void draw() {
 
     if (keyCode == LEFT) {
 
-      //walk.play(0.085);
       // If they press left, set up the walking animation
       // (Tragically we only have animation for walking to
       // the right, so this avatar will have to moon walk.)
@@ -223,21 +224,18 @@ void draw() {
       avatar.setVelXY(-avatarSpeed, 0);
     } else if (keyCode == RIGHT) {
 
-      walk.play(0.085);
       // If they press right, set the walking animation frames
       avatar.setFrameSequence(12, 15, 0.1);
       // And set a positive velocity
       avatar.setVelXY(avatarSpeed, 0);
     } else if (keyCode == UP) {
 
-      walk.play(0.085);
       // If they press up, set the walking animation frames
       avatar.setFrameSequence(8, 11, 0.1);
       // And set a positive velocity
       avatar.setVelXY(0, -avatarSpeed);
     } else if (keyCode == DOWN) {
 
-      walk.play(0.085);
       // If they press down, set the walking animation frames
       avatar.setFrameSequence(0, 3, 0.1);
       // And set a positive velocity
@@ -251,7 +249,7 @@ void draw() {
   }
   // enemy stays on the floor and goes automatically from left to right
 
-  enemy.setFrameSequence(1, 1, 0.5);
+  enemy.setFrameSequence(1, 1, 0.2);
   // And set a positive velocity
   enemy.setVelXY(enemySpeed, 0);
   //Red Alert ends here.-----------------------------------Ok
