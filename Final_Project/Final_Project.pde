@@ -83,8 +83,8 @@ float enemySpeed = 70;
 
 void setup()
 {
-//  size(1920, 1080);
-size(960, 540);
+  size(1920, 1080);
+//size(960, 540);
   minim = new Minim(this);
   // We use minim.getLineIn() to get access to the microphone data
   // mic = minim.getLineIn();
@@ -123,7 +123,7 @@ size(960, 540);
   
   
   // create enemy sprite follows
-  enemy = new Sprite(this, "fish0.png", 1, 1, 0);
+  enemy = new Sprite(this, "fish6.png", 1, 1, 0);
   // Set the enemy's position on screen
   enemy.setXY(width, height-300); // on the floor of bedroom
   // Set the default (idle) frame sequence from the

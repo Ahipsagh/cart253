@@ -58,6 +58,7 @@ class Score {
       enemy.setDead(true);
       win.amp(0.7);
       win.play();
+      win.stop();
       PFont courierFont = createFont("Courier", 64); // Create a Courier font
       textFont(courierFont); // Use the new font
       fill(0, 255, 0);
