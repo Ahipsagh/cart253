@@ -28,7 +28,7 @@ class HeartSprite extends Sprite {
     diameter = tempW;
     w=tempW;
     img = image;
-    this.setXY(1290, 350);
+    this.setXY(-200, -20);
     this.setFrameSequence(1, 1);
   }
 
@@ -67,9 +67,10 @@ class HeartSprite extends Sprite {
     // and then it is displayed.  
     y += vy; // increases the velocity by 2
     xoff = xoff + .1;
-    float n = noise(xoff) * 150 ;
-    image(img, x, y, w-n, w-n);
+    float n = noise(xoff) * 15 ;
+    //image(img, x, y, w-n, w-n);
     this.setXY((int)x, (int)y);
+    this.setScale(noise(xoff) * 1.2);
   }
 
   //ArrayList collision avatar and heart using method from Sprite Library
