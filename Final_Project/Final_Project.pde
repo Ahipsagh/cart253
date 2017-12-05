@@ -69,7 +69,7 @@ Sprite enemy;
 
 //Sprite heartSprite;
 ArrayList<HeartSprite> heartSprites;
-int heartSpriteWidth =200;
+int heartSpriteWidth =(int)random(100,175);
 
 // Create a StopWatch to keep track of time passing
 // (So we know how fast the animation should run.)
@@ -77,7 +77,7 @@ StopWatch timer = new StopWatch();
 
 // How fast the avatar mores (pixels per second)
 float avatarSpeed = 200; 
-float enemySpeed = 70; 
+float enemySpeed = 60; 
 //Red Alert ends here.-----------------------------------Ok
 
 
@@ -136,7 +136,7 @@ void setup()
   //void mousePressed() {
   // A new HeartSprite object is added to the ArrayList (by default to the end)
   for (int i=0; i<42; i++) 
-    heartSprites.add(new HeartSprite(this, img, random(width), random(height), heartSpriteWidth));
+    heartSprites.add(new HeartSprite(this, img, random(width-100), random(height-100), heartSpriteWidth));
 }
 
 void draw() {
@@ -160,6 +160,7 @@ void draw() {
   { 
     HeartSprite heartSprite = heartSprites.get(i);
     // An ArrayList doesn't know what it is storing so we have to cast the object coming out
+    //heartSprite.move();
     heartSprite.ascend();
     heartSprite.display();
 

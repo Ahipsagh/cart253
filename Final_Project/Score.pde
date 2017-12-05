@@ -43,9 +43,11 @@ class Score {
     textFont(courierFont); // Use the new font
     textSize(45);
     fill(255, 255, 255);
-    text(counter, 370, 300); // show counter on screen
-    text("monster time", 370, 150); // show timer on screen
-    text( ( (timer.getRunTime()<=42)&& (timer.getRunTime()>=0) ?  42-(int)timer.getRunTime() : 0) , 370, 200); // show timer on screen
+    text(counter, 1270, 300); // show counter on screen
+    //fill(127, 127, 127);
+    text("monster", 1250,100); // show timer on screen
+    text("countdown", 1250, 150); // show timer on screen
+    text( ( (timer.getRunTime()<=42)&& (timer.getRunTime()>=0) ?  42-(int)timer.getRunTime() : 0) , 1270, 200); // show timer on screen
     if (timer.getRunTime() >15) 
     enemy.setScale(timer.getRunTime()/10);
 
@@ -58,13 +60,13 @@ class Score {
       enemy.setDead(true);
       win.amp(0.7);
       win.play();
-      win.stop();
+      //in.stop();
       PFont courierFont = createFont("Courier", 64); // Create a Courier font
       textFont(courierFont); // Use the new font
       fill(0, 255, 0);
       textSize(92);
-      text("Game Over", 80, 350); // Text on screen Game Over
-      text("NO More monster ", 80, 250); // Text on screen Game Over
+      text("Game Over", 1000, 450); // Text on screen Game Over
+      text("monster is GONE", 1000, 550); // Text on screen Game Over
     } else if ( (winner=="monster") && (gameIsOver==true) )
     {
       lose.amp(0.3);
@@ -73,8 +75,10 @@ class Score {
       textFont(courierFont); // Use the new font
       fill(0, 255, 0);
       textSize(92);
-      text("Game Over", 80, 250); // Text on screen Game Over
-      text("monster GOT you ", 80, 350); // Text on screen Game Over
+      text("Game Over", 1000, 450); // Text on screen Game Over
+      text("monster GOT you ", 1000, 550); // Text on screen Game Over
+      avatar.setScale(2.5);
+      avatar.setRot(-1.5);
     }
   }
 }
