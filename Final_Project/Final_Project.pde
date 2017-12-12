@@ -11,9 +11,28 @@
 //
 //------------------------------------------------------------------------------------//
 // Be Love
-// GitHub testing to make sure that it works from the desktop.
-// Let's add some sound.
-// Able to crash the sketch from Concordia !
+//
+// The game, Be LOVE, is about a child who is frightened by a monster in his bedroom 
+// at night. He jumps off his bed to collect love ( which is everywhere ) as his weapon 
+// in the hope of transforming the monster into a cuddly teddy.
+//
+// The child can move using the traditional arrow keys, wasd, and this means that the  
+// arrow keys permit movement up and down as well. 
+//
+// The monster moves from the closet to the edge of the room getting bigger with time. If 
+// the monster makes it across the bedroom (from left to right) before the monster timer
+// of 42 seconds has elapsed and before the child has collected enough hearts (42), the monster 
+// wins and the child is left petrified.
+// 
+// The game has a scoreboard showing the monster timer as well as the heart collection
+// counter.
+//
+// The game uses a spritesheet for the avatar and an arraylist of 42 sprite hearts that are 
+// managed by the Processing Sprite Library.
+//
+// The avatar, heart, and background were sourced by Rachel Beaney and the sounds were created by Emre Ekici
+// at the Gamerella 2017.
+//
 // Declare variables
 //------------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------------//
