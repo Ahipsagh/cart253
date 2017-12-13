@@ -10,8 +10,12 @@
 //
 //
 //------------------------------------------------------------------------------------//
-// Be Love
+// 
+// Artitst Statement
+// -----------------
 //
+// Background - Be LOVE
+// --------------------
 // The game, Be LOVE, is about a child who is frightened by a monster in his bedroom 
 // at night. He jumps off his bed to collect love ( which is everywhere ) as his weapon 
 // in the hope of getting rid of the monster.
@@ -30,14 +34,33 @@
 // The game uses a spritesheet for the avatar and an arraylist of 42 sprite hearts that are 
 // managed by the Processing Sprite Library.
 //
-// The avatar, heart, and background were sourced by Rachel Beaney and the sounds were created by Emre Ekici
-// at Gamerella 2017.
+// Interesting Coding Techniques
+// -----------------------------
+// Some interesting features of this game include making use of the Sprite Library of Processing
+// in order to show off the 4x4 sprite sheet for the avatar. 
 //
-// Declare variables
-//------------------------------------------------------------------------------------//
-//------------------------------------------------------------------------------------//
+// Further, the enemy and collectibles were set up using the Sprite Library in order to manage 
+// the collisions between the sprites.
+//
+// Did not expect to extend the Sprite class, however, I’m convinced that it was necessary to 
+// finally get the collectibles collision with the avatarr to work.
+//
+// The heart Sprites were set up in an array list.  Managing the array list is a new to me feature 
+// of this game.
+//
+// The game has a particle system, albeit written by Daniel Shiffman, which also features the use 
+// of array lists as well as PVector.  I was able to modify it to make it work for the game.
+//
+// Credits
+// -------
+// Rachel Beaney sourced the avatar spritesheet, heart, and background 
+// Emre Ekici - sound
+// Daniel Shiffman - particle system
+//
+
+//------------------------------------------------------------------------------------
 // Environment
-//------------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------------
 //
 // import the following Processing libraries.
 import ddf.minim.*;
