@@ -13,7 +13,6 @@ class Score {
   // Score(int _score)
   //
   // score counter, timer and displays it on the screen
-
   Score(int counter)
   {
     score=counter;
@@ -53,14 +52,14 @@ class Score {
     text(counter, 1200, 350); // show counter on screen
     // got to use an inline if statement
     text( ( (timer.getRunTime()<=42)&& (timer.getRunTime()>=0) ?  42-(int)timer.getRunTime() : 0), 1200, 150); // show timer on screen
-    if (timer.getRunTime() >15) 
-      enemy.setScale(timer.getRunTime()/10);
+    if (timer.getRunTime() >10) 
+      enemy.setScale(timer.getRunTime()/3);
   }
 
-  //------------------------------------------------------------------------------------
-  void gameOver()
-    //------------------------------------------------------------------------------------  
-  {
+//------------------------------------------------------------------------------------
+void gameOver()
+//------------------------------------------------------------------------------------  
+{
     if ( (winner=="you") && (gameIsOver==true) )
     {
       enemy.setDead(true); // remove the enemy from the screen

@@ -69,11 +69,13 @@ PImage img;
 int counter = 0;
 boolean gameIsOver=false;   // control when game is over
 String winner=null;       // winner is detected by color
-
-//-----------------------------------------------------------Sprite
+//------------------------------------------------------------------------------
+// Creating the avatar, enemy and collectibles using the Sprite library
+//
 // Import the Sprites library (you need to install
 // it if you don't have it)
 //
+//------------------------------------------------------------------------------
 // Create a Sprite for our avatar
 Sprite avatar;
 //
@@ -90,7 +92,7 @@ StopWatch timer = new StopWatch();
 
 // How fast the avatar and enemy move (pixels per second)
 float avatarSpeed = 300; 
-float enemySpeed = 60; 
+float enemySpeed = 50; 
 
 //------------------------------------------------------------------------------
 void setup()
@@ -281,10 +283,12 @@ void draw()
   }
 }
 
-// mouseClicked
-//
-// Handle music etc.
+
 //------------------------------------------------------------------------------
+// The mouse click method controls the sound of the background music.  The first 
+// time you click, it turns off the music, the next click will re-instate the 
+// music at half the volume and thereafter it toggles on and off.
+//
 void mouseClicked() 
 //------------------------------------------------------------------------------
 {
@@ -301,20 +305,23 @@ void mouseClicked()
 }
 
 //------------------------------------------------------------------------------
+// The handleHearts method takes care of managing the arraylist of Sprite objects.
+// This includes adding and removing Sprite objects from the arraylist.  
+// Each time a Heart is removed a sound plays.  
+// The counter is incremented and the display is updated.
 void handleHearts()
 //------------------------------------------------------------------------------
 {
   for (int i = heartSprites.size()-1; i >0; i--) 
   { 
     HeartSprite heartSprite = heartSprites.get(i);
-    // An ArrayList doesn't know what it is storing so we have to cast the object coming out
-    //heartSprite.move();
+// An ArrayList doesn't know what it is storing so we have to cast the object coming out
     heartSprite.ascend();
     heartSprite.display();
 
 
-    //  Here the heart (Sprite) are collected and removed from the arraylsit with the method
-    // heartSprite.bb_collision(avatar)
+//  Here the heart (Sprite) are collected and removed from the arraylsit with the method
+// heartSprite.bb_collision(avatar)
     if (heartSprite.bb_collision(avatar)) {
       counter++;
       heartCollected.amp(0.5);
