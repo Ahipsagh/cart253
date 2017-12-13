@@ -94,6 +94,10 @@ StopWatch timer = new StopWatch();
 float avatarSpeed = 300; 
 float enemySpeed = 50; 
 
+ParticleSystem ps;
+
+
+
 //------------------------------------------------------------------------------
 void setup()
 //
@@ -116,11 +120,17 @@ void setup()
   lose = new SoundFile(this, "sounds/lose.mp3");
   // the song loops until the mouse is clicked.
   song.loop();
+//------------------------------------------------------------------------------
+// Adding a particle System by Daniel Shiffman
+//------------------------------------------------------------------------------
 
+  ps = new ParticleSystem(new PVector(width/2, 150));
 
   score = new Score(counter);
   bgimg = loadImage("background.png");
   img = loadImage("heart0.png");
+
+
 
   //Arraylist 
   // Create an empty ArrayList (will store HeartSprite objects)
@@ -163,13 +173,15 @@ void setup()
 void draw()
 //------------------------------------------------------------------------------
 {
-
+    
 
   //while (gameIsOver==false)
   //{  
 
-  // background(127);
-  image(bgimg, width/2, height/2);
+   background(127);
+   image(bgimg, width/2, height/2);
+   ps.addParticle();
+   ps.run();
 
   // set up the Array list of Hearts (Sprite)  
   //ArrayList
