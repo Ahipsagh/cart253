@@ -15,8 +15,10 @@ import sprites.maths.Vector2D;
 // Simple bouncing HeartSprite class
 
 //------------------------------------------------------------------------------------
+// added lots of randomness to create interesting heart collectibles.
+//
 class HeartSprite extends Sprite 
-  //------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------
 {
   float x;
   float y;
@@ -33,7 +35,7 @@ class HeartSprite extends Sprite
 
   //------------------------------------------------------------------------------------
   HeartSprite(PApplet app, PImage image, float tempX, float tempY, float tempW) 
-    //------------------------------------------------------------------------------------  
+  //------------------------------------------------------------------------------------  
   {
     super(app, "heart0.png", 1, 1, 0);
     x= tempX;
@@ -71,7 +73,8 @@ class HeartSprite extends Sprite
     this.setScale(noise(xoff) * 1.2);
   }
 
-  //ArrayList collision avatar and heart using method from Sprite Library
+//ArrayList collision avatar and heart using method from Sprite Library
+//
   boolean objectCollision(Sprite sprite) {
     return this.cc_collision(sprite);
   }

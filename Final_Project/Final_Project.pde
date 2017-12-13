@@ -14,7 +14,7 @@
 //
 // The game, Be LOVE, is about a child who is frightened by a monster in his bedroom 
 // at night. He jumps off his bed to collect love ( which is everywhere ) as his weapon 
-// in the hope of transforming the monster into a cuddly teddy.
+// in the hope of getting rid of the monster.
 //
 // The child can move using the traditional arrow keys, wasd, and this means that the  
 // arrow keys permit movement up and down as well. 
@@ -31,7 +31,7 @@
 // managed by the Processing Sprite Library.
 //
 // The avatar, heart, and background were sourced by Rachel Beaney and the sounds were created by Emre Ekici
-// at the Gamerella 2017.
+// at Gamerella 2017.
 //
 // Declare variables
 //------------------------------------------------------------------------------------//
@@ -39,7 +39,7 @@
 // Environment
 //------------------------------------------------------------------------------------//
 //
-// importing the libraries.
+// import the following Processing libraries.
 import ddf.minim.*;
 import processing.sound.*;
 
@@ -54,27 +54,19 @@ SoundFile heartCollected;
 SoundFile win;
 SoundFile lose;
 
-//AudioInput mic; // The class that lets us get at the microphone
-//float volume = map(mouseX, 0, width, 0, 1);
 boolean songPlays=true; // used to toggle play and stop
 
-// Global variables 
 // Show counter on screen
 Score score;
-
-
 
 PImage bgimg;
 PImage img;
 int counter = 0;
 boolean gameIsOver=false;   // control when game is over
-String winner=null;       // winner is detected by color
+String winner=null;       // winner value is either you or monster
+
 //------------------------------------------------------------------------------
 // Creating the avatar, enemy and collectibles using the Sprite library
-//
-// Import the Sprites library (you need to install
-// it if you don't have it)
-//
 //------------------------------------------------------------------------------
 // Create a Sprite for our avatar
 Sprite avatar;
@@ -87,26 +79,27 @@ ArrayList<HeartSprite> heartSprites;
 int heartSpriteWidth =(int)random(100, 175);
 
 // Create a StopWatch to keep track of time passing
-// (So we know how fast the animation should run.)
 StopWatch timer = new StopWatch();
 
 // How fast the avatar and enemy move (pixels per second)
 float avatarSpeed = 300; 
 float enemySpeed = 50; 
 
+//------------------------------------------------------------------------------
+// Installed a particle system by Daniel Shiffman to create atmosphere and 
+// flair if you win.
+//------------------------------------------------------------------------------
 ParticleSystem ps;
-
-
 
 //------------------------------------------------------------------------------
 void setup()
-//
-// Initializing the variables for the game.
-// 
-// Background, heart collectible, avatar, enemy images are initialized.
-// Sounds are imported
-// arraylist of hearts is set up
-//------------------------------------------------------------------------------
+  //
+  // Initializing the variables for the game.
+  // 
+  // Background, heart collectible, avatar, enemy images are initialized.
+  // Sounds are imported
+  // arraylist of hearts is set up
+  //------------------------------------------------------------------------------
 {
   size(1920, 1080);
   //size(960, 540);
@@ -120,18 +113,26 @@ void setup()
   lose = new SoundFile(this, "sounds/lose.mp3");
   // the song loops until the mouse is clicked.
   song.loop();
-//------------------------------------------------------------------------------
-// Adding a particle System by Daniel Shiffman
-//------------------------------------------------------------------------------
+  reset();
+}
 
-  ps = new ParticleSystem(new PVector(width/2, height/4));
+void reset()
+{
+  //------------------------------------------------------------------------------
+  // Adding a particle System by Daniel Shiffman
+  //------------------------------------------------------------------------------
+
+  ps = new ParticleSystem(new PVector(width/2, height));
 
   score = new Score(counter);
   bgimg = loadImage("background.png");
   img = loadImage("heart0.png");
 
 
-
+  //------------------------------------------------------------------------------
+  // The following code is from the Sprite library and has been modified to 
+  // handle the avatar spritesheet, enemy and heart arraylist.
+  //------------------------------------------------------------------------------
   //Arraylist 
   // Create an empty ArrayList (will store HeartSprite objects)
   heartSprites = new ArrayList<HeartSprite>();
@@ -171,31 +172,24 @@ void setup()
 
 //------------------------------------------------------------------------------
 void draw()
-//------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------
 {
-    
 
-  //while (gameIsOver==false)
-  //{  
+  background(127);
+  image(bgimg, width/2, height/2);
+  //------------------------------------------------------------------------------
+  // adding bubbles to create atmosphere to the game with the help of the particle
+  // system by Daniel Shiffman
+  //------------------------------------------------------------------------------  
+  ps.addParticle();
+  ps.run();
 
-   background(127);
-   image(bgimg, width/2, height/2);
-   ps.addParticle();
-   ps.run();
+  score.display(); // show the timer countdown and counter on screen
 
-  // set up the Array list of Hearts (Sprite)  
-  //ArrayList
-  // With an array, we say HeartSprites.length, with an ArrayList, we say HeartSprites.size()
-  // The length of an ArrayList is dynamic
-  // Notice how we are looping through the ArrayList backwards
-  // This is because we are deleting elements from the list 
-  score.display();
-
-  handleHearts(); 
-
-  //ArrayList ends
-  //Red Alert ! -------------------- Sprite library stuff follows
-  // Sprites library stuff!
+  handleHearts(); // manage the hearts arraylist
+//------------------------------------------------------------------------------
+// more code from the Sprite library 
+//------------------------------------------------------------------------------ 
   // We get the time elapsed since the last frame (the deltaTime)
   double deltaTime = timer.getElapsedTime();
   // We update the sprites in the program based on that delta
@@ -224,10 +218,9 @@ void draw()
   } else if (enemy.getX() < 0) {
     enemy.setX(enemy.getX() + width);
   }
-  
+
   //
   //------------------------------------------------------------------------------
-  // Handle input is a key is pressed
   // This section controls the arrow keys which move the avatar in all directions
   // around the screen.
   //
@@ -275,9 +268,10 @@ void draw()
     // And turn off velocity
     avatar.setVelXY(0, 0);
   }
-//------------------------------------------------------------------------------
-// If gameIsOver is true then the avatar freezes postion
-//------------------------------------------------------------------------------
+
+  //------------------------------------------------------------------------------
+  // If gameIsOver is true then the avatar freezes postion
+  //------------------------------------------------------------------------------
   if (gameIsOver) {
     avatar.setFrameSequence(2, 2, 0.5);
   }
@@ -287,27 +281,26 @@ void draw()
   // And set a positive velocity
   enemy.setVelXY(enemySpeed, 0);
 
-//------------------------------------------------------------------------------
-// If gameIsOver is true then the enemy freezes postion but continues to 
-// grow bigger.
-//------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------
+  // If gameIsOver is true then the enemy freezes postion but continues to 
+  // grow bigger.
+  //------------------------------------------------------------------------------
   if (gameIsOver) {
-  enemy.setFrameSequence(1, 1, 0.2);
-  // And set a positive velocity
-  enemy.setVelXY(0, 0);
-
+    enemy.setFrameSequence(1, 1, 0.2);
+    // And set a positive velocity
+    enemy.setVelXY(0, 0);
   }
-  
+
   //The monster works on a timer.  When the time is up and the avatar has not collected all the hearts
   // monster wins.
   if ( (gameIsOver ==false) &&
     (timer.getRunTime() >= 42.0) )
   {
-   
+
     winner="monster";
     gameIsOver=true;
-      ps.addParticle();
-      ps.run();
+    ps.addParticle();
+    ps.run();
     for (int i=0; i<60; i++)
     {
 
@@ -329,7 +322,7 @@ void draw()
 // music at half the volume and thereafter it toggles on and off.
 //
 void mouseClicked() 
-//------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------
 {
   if (songPlays) 
   {
@@ -349,18 +342,23 @@ void mouseClicked()
 // Each time a Heart is removed a sound plays.  
 // The counter is incremented and the display is updated.
 void handleHearts()
-//------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------
 {
+  // set up the arraylist of Hearts (Sprite)  
+  // With an array, we say HeartSprites.length, with an ArrayList, we say HeartSprites.size()
+  // The length of an ArrayList is dynamic
+  // we are looping through the ArrayList backwards because we are deleting elements from the list 
+  //
   for (int i = heartSprites.size()-1; i >0; i--) 
   { 
     HeartSprite heartSprite = heartSprites.get(i);
-// An ArrayList doesn't know what it is storing so we have to cast the object coming out
+    // An ArrayList doesn't know what it is storing so we have to cast the object coming out
     heartSprite.ascend();
     heartSprite.display();
 
 
-//  Here the heart (Sprite) are collected and removed from the arraylsit with the method
-// heartSprite.bb_collision(avatar)
+    //  Here the heart (Sprite) are collected and removed from the arraylsit with the method
+    // heartSprite.bb_collision(avatar)
     if (heartSprite.bb_collision(avatar)) {
       counter++;
       heartCollected.amp(0.5);

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------
 // Score Class takes care of controlling the enemy timer countdown as well as the 
-// avatar counter
+// avatar collectible counter
 //
 //------------------------------------------------------------------------------------
 class Score {
@@ -20,7 +20,7 @@ class Score {
   }
 
   //------------------------------------------------------------------------------------
-  // Updates position based on velocity and constraints the paddle to the window
+  // Updates position based on velocity and constraints the hearts to the window
   //
   void update() {
     //------------------------------------------------------------------------------------
@@ -57,9 +57,14 @@ class Score {
   }
 
 //------------------------------------------------------------------------------------
+// Game over when avatar has collected 42 hearts in order to get rid of the monser
+//
+// Game over when enemy countdown reaches 0 and avatar does not have the required 
+// number of collectibles
+//
 void gameOver()
 //------------------------------------------------------------------------------------  
-{
+  {
     if ( (winner=="you") && (gameIsOver==true) )
     {
       enemy.setDead(true); // remove the enemy from the screen
@@ -68,6 +73,7 @@ void gameOver()
         win.play();
         endSoundIsPlaying = true;
       }
+      song.stop();
       PFont courierFont = createFont("Courier", 64); // Create a Courier font
       textFont(courierFont); // Use the font
       fill(0, 255, 0);
@@ -81,6 +87,7 @@ void gameOver()
         lose.play();
         endSoundIsPlaying = true;
       }
+      song.stop();
       PFont courierFont = createFont("Courier", 64); // Create a Courier font
       textFont(courierFont); // Use the font
       fill(0, 255, 0);
