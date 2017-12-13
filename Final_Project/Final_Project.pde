@@ -124,7 +124,7 @@ void setup()
 // Adding a particle System by Daniel Shiffman
 //------------------------------------------------------------------------------
 
-  ps = new ParticleSystem(new PVector(width/4, 150));
+  ps = new ParticleSystem(new PVector(width/2, height/4));
 
   score = new Score(counter);
   bgimg = loadImage("background.png");
