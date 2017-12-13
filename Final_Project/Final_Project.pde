@@ -124,7 +124,7 @@ void setup()
 // Adding a particle System by Daniel Shiffman
 //------------------------------------------------------------------------------
 
-  ps = new ParticleSystem(new PVector(width/2, 150));
+  ps = new ParticleSystem(new PVector(width/4, 150));
 
   score = new Score(counter);
   bgimg = loadImage("background.png");
@@ -295,6 +295,7 @@ void draw()
   enemy.setFrameSequence(1, 1, 0.2);
   // And set a positive velocity
   enemy.setVelXY(0, 0);
+
   }
   
   //The monster works on a timer.  When the time is up and the avatar has not collected all the hearts
@@ -302,9 +303,11 @@ void draw()
   if ( (gameIsOver ==false) &&
     (timer.getRunTime() >= 42.0) )
   {
+   
     winner="monster";
     gameIsOver=true;
-
+      ps.addParticle();
+      ps.run();
     for (int i=0; i<60; i++)
     {
 

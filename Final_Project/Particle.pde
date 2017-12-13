@@ -8,7 +8,7 @@ class Particle {
   float lifespan;
 
   Particle(PVector l) {
-    acceleration = new PVector(0, 0.05);
+    acceleration = new PVector(0, 0.03);
     velocity = new PVector(random(-1, 1), random(-2, 0));
     position = l.copy();
     lifespan = 255.0;
@@ -28,9 +28,23 @@ class Particle {
 
   // Method to display
   void display() {
+    
+    if (winner=="monster")
+    {
+     noFill();
+    }
+    else if (winner=="you") {
+      stroke(255, lifespan);
+    fill( random(255), random(255), random(255), lifespan);
+    ellipse(position.x, position.y, 10, 10); 
+    }
+    else
+    {
     stroke(255, lifespan);
-    fill(255, lifespan);
-    ellipse(position.x, position.y, 8, 8);
+     noFill();
+    
+    ellipse(position.x, position.y, 10, 10);
+    }
   }
 
   // Is the particle still useful?
