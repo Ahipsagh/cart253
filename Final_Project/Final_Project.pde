@@ -31,7 +31,7 @@
 // managed by the Processing Sprite Library.
 //
 // The avatar, heart, and background were sourced by Rachel Beaney and the sounds were created by Emre Ekici
-// at the Gamerella 2017
+// at the Gamerella 2017.
 //
 // Declare variables
 //------------------------------------------------------------------------------------//
@@ -156,7 +156,7 @@ void setup()
   //Add heart Sprite to the ArrayList
   // A new HeartSprite object is added to the ArrayList (by default to the end)
   for (int i=0; i<42; i++) 
-    heartSprites.add(new HeartSprite(this, img, random(width-100), random(height-100), heartSpriteWidth));
+    heartSprites.add(new HeartSprite(this, img, random(width-150), random(height-150), heartSpriteWidth));
 }
 
 //------------------------------------------------------------------------------
@@ -212,7 +212,22 @@ void draw()
   } else if (enemy.getX() < 0) {
     enemy.setX(enemy.getX() + width);
   }
+  
+  //
+  //------------------------------------------------------------------------------
   // Handle input is a key is pressed
+  // This section controls the arrow keys which move the avatar in all directions
+  // around the screen.
+  //
+  // The avatar can cross over from edge of screen to other edge of screen.  For
+  // example the avatar can leave the right edge of screen and re-emerge on the 
+  // beginning of the left edge of the screen.  The same is true for top to bottom,
+  // for example, if the avatar is moving up and past the top of the screen, the 
+  // avatar will wraparound and emerge from the bottom of the screen.
+  //
+  // You can move the avatar as long as the gameIsOver condtion is false.
+  //
+  //------------------------------------------------------------------------------
   if (keyPressed && !gameIsOver) {
 
     if (keyCode == LEFT) {
@@ -243,12 +258,14 @@ void draw()
       avatar.setVelXY(0, avatarSpeed);
     }
   } else {
-    // If no key is pressed then return to the idel frame
+    // If no key is pressed then return to the idle frame
     avatar.setFrameSequence(2, 3, 0.5);
     // And turn off velocity
     avatar.setVelXY(0, 0);
   }
-
+//------------------------------------------------------------------------------
+// If gameIsOver is true then the avatar freezes postion
+//------------------------------------------------------------------------------
   if (gameIsOver) {
     avatar.setFrameSequence(2, 2, 0.5);
   }
@@ -257,10 +274,17 @@ void draw()
   enemy.setFrameSequence(1, 1, 0.2);
   // And set a positive velocity
   enemy.setVelXY(enemySpeed, 0);
-  //Red Alert ends here.-----------------------------------Ok
 
-
-
+//------------------------------------------------------------------------------
+// If gameIsOver is true then the enemy freezes postion but continues to 
+// grow bigger.
+//------------------------------------------------------------------------------
+  if (gameIsOver) {
+  enemy.setFrameSequence(1, 1, 0.2);
+  // And set a positive velocity
+  enemy.setVelXY(0, 0);
+  }
+  
   //The monster works on a timer.  When the time is up and the avatar has not collected all the hearts
   // monster wins.
   if ( (gameIsOver ==false) &&
