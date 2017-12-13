@@ -31,7 +31,7 @@
 // managed by the Processing Sprite Library.
 //
 // The avatar, heart, and background were sourced by Rachel Beaney and the sounds were created by Emre Ekici
-// at the Gamerella 2017.
+// at the Gamerella 2017
 //
 // Declare variables
 //------------------------------------------------------------------------------------//
@@ -70,23 +70,17 @@ int counter = 0;
 boolean gameIsOver=false;   // control when game is over
 String winner=null;       // winner is detected by color
 
-//Red Alert ! -------------------- Sprite library stuff follows
+//-----------------------------------------------------------Sprite
 // Import the Sprites library (you need to install
 // it if you don't have it)
-
-
-
-
-
-
-
+//
 // Create a Sprite for our avatar
 Sprite avatar;
-
+//
 // Create a Sprite for our enemy
 Sprite enemy;
-
-//Sprite heartSprite;
+//
+// Create an arraylist of Sprites for the collectible heart called heartSprite;
 ArrayList<HeartSprite> heartSprites;
 int heartSpriteWidth =(int)random(100, 175);
 
@@ -94,13 +88,19 @@ int heartSpriteWidth =(int)random(100, 175);
 // (So we know how fast the animation should run.)
 StopWatch timer = new StopWatch();
 
-// How fast the avatar mores (pixels per second)
+// How fast the avatar and enemy move (pixels per second)
 float avatarSpeed = 300; 
 float enemySpeed = 60; 
-//Red Alert ends here.-----------------------------------Ok
 
-
+//------------------------------------------------------------------------------
 void setup()
+//
+// Initializing the variables for the game.
+// 
+// Background, heart collectible, avatar, enemy images are initialized.
+// Sounds are imported
+// arraylist of hearts is set up
+//------------------------------------------------------------------------------
 {
   size(1920, 1080);
   //size(960, 540);
@@ -128,7 +128,7 @@ void setup()
 
   heartSprites.add(new HeartSprite(this, img, mouseX, mouseY, heartSpriteWidth));
   //Arraylist ends
-  //Red Alert ! -------------------- Sprite library stuff follows
+
   // Create our Sprite by providing "this", the file
   // with the spritesheet, the number of columns in the
   // sheet, the number of rows in the sheet, and the
@@ -141,24 +141,26 @@ void setup()
   avatar.setFrameSequence(1, 4);
 
 
-  // create enemy sprite follows
+  // create enemy sprite and have the Fish position on the floor
   enemy = new Sprite(this, "fish6.png", 1, 1, 0);
   // Set the enemy's position on screen
   enemy.setXY(width, height-300); // on the floor of bedroom
   // Set the default (idle) frame sequence from the
   // sheet to animate
   enemy.setFrameSequence(1, 1);
-  //Red Alert ends here.-----------------------------------Ok
 
 
-  //Add to the ArrayList by Clicking on mouse
-  //void mousePressed() {
+
+  //Add heart Sprite to the ArrayList
   // A new HeartSprite object is added to the ArrayList (by default to the end)
   for (int i=0; i<42; i++) 
     heartSprites.add(new HeartSprite(this, img, random(width-100), random(height-100), heartSpriteWidth));
 }
 
-void draw() {
+//------------------------------------------------------------------------------
+void draw()
+//------------------------------------------------------------------------------
+{
 
 
   //while (gameIsOver==false)
@@ -282,8 +284,10 @@ void draw() {
 // mouseClicked
 //
 // Handle music etc.
-
-void mouseClicked() {
+//------------------------------------------------------------------------------
+void mouseClicked() 
+//------------------------------------------------------------------------------
+{
   if (songPlays) 
   {
     song.stop(); // You can click background music to stop 
@@ -296,7 +300,10 @@ void mouseClicked() {
   }
 }
 
-void handleHearts() {
+//------------------------------------------------------------------------------
+void handleHearts()
+//------------------------------------------------------------------------------
+{
   for (int i = heartSprites.size()-1; i >0; i--) 
   { 
     HeartSprite heartSprite = heartSprites.get(i);
